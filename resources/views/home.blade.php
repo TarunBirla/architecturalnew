@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Emily Royce | Architecture, Spatial Design & Floor Plans')
+@section('title', \App\Models\SiteSetting::get('about_designer_name', 'Emily Royce') . ' | Architecture, Spatial Design & Floor Plans')
 
 @section('content')
 
@@ -13,9 +13,9 @@
     <!-- Hero Background Image Carousel (Alpine.js) -->
     <div x-data="{ 
             slides: [
-                'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1800&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1800&auto=format&fit=crop'
+                '{{ \App\Models\SiteSetting::get('hero_image_1', 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop') }}',
+                '{{ \App\Models\SiteSetting::get('hero_image_2', 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1800&auto=format&fit=crop') }}',
+                '{{ \App\Models\SiteSetting::get('hero_image_3', 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1800&auto=format&fit=crop') }}'
             ],
             active: 0,
             init() { setInterval(() => { this.active = (this.active + 1) % this.slides.length }, 5500); }
@@ -39,21 +39,22 @@
         <div class="max-w-3xl space-y-6">
             <div class="inline-flex items-center space-x-2 px-3 py-1 bg-[#C5A880]/15 border border-[#C5A880]/40 rounded-full">
                 <span class="w-2 h-2 rounded-full bg-[#C5A880] animate-ping"></span>
-                <span class="text-xs font-heading font-semibold uppercase tracking-widest text-[#C5A880]">Design & Architecture Studio</span>
+                <span class="text-xs font-heading font-semibold uppercase tracking-widest text-[#C5A880]">
+                    {{ \App\Models\SiteSetting::get('hero_badge_text', 'Design & Architecture Studio') }}
+                </span>
             </div>
 
             <h1 class="text-4xl sm:text-6xl lg:text-7xl font-heading font-bold text-white tracking-tight leading-[1.1]">
-                Precision Spatial <br>
-                <span class="gold-gradient-text">Architecture & Floor Plans</span>
+                {{ \App\Models\SiteSetting::get('hero_headline', 'Precision Spatial Architecture & Floor Plans') }}
             </h1>
 
             <p class="text-base sm:text-xl text-gray-300 font-sans font-light leading-relaxed max-w-2xl">
-                Elevating spaces through minimalist architectural concepts, 2D/3D CAD floor planning, Land Registry lease plans, and sustainable urban design. Led by Emily Royce.
+                {{ \App\Models\SiteSetting::get('hero_subheadline', 'Elevating spaces through minimalist architectural concepts, 2D/3D CAD floor planning, Land Registry lease plans, and sustainable urban design.') }}
             </p>
 
             <div class="pt-4 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
                 <a href="#floor-plan-visualizer" class="w-full sm:w-auto px-8 py-4 bg-[#C5A880] text-black font-heading font-bold text-sm uppercase tracking-wider hover:bg-white transition-all duration-300 shadow-xl shadow-[#C5A880]/20 flex items-center justify-center space-x-3">
-                    <span>Explore 2D vs 3D Floor Plans</span>
+                    <span>{{ \App\Models\SiteSetting::get('hero_cta_button_text', 'Explore 2D vs 3D Floor Plans') }}</span>
                     <i class="fa-solid fa-arrows-left-right text-xs"></i>
                 </a>
                 <a href="{{ route('projects.index') }}" class="w-full sm:w-auto px-8 py-4 border border-white/20 hover:border-[#C5A880] text-white hover:text-[#C5A880] font-heading font-semibold text-sm uppercase tracking-wider transition-all duration-300 flex items-center justify-center space-x-2">
@@ -88,18 +89,18 @@
             <!-- Avatar / Studio Portrait -->
             <div class="lg:col-span-5 relative">
                 <div class="relative z-10 rounded-2xl overflow-hidden border border-white/10 shadow-2xl group">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop" 
-                         alt="Emily Royce - Architect & Designer" 
+                    <img src="{{ \App\Models\SiteSetting::get('about_designer_image', 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop') }}" 
+                         alt="{{ \App\Models\SiteSetting::get('about_designer_name', 'Emily Royce') }}" 
                          class="w-full h-[480px] object-cover object-center group-hover:scale-105 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                     
                     <div class="absolute bottom-6 left-6 right-6 p-4 glass-card rounded-xl">
                         <div class="flex items-center justify-between">
                             <div>
-                                <h4 class="font-heading text-lg font-bold text-white">Emily Royce</h4>
-                                <p class="text-xs text-[#C5A880]">University Architecture Scholar & Consultant</p>
+                                <h4 class="font-heading text-lg font-bold text-white">{{ \App\Models\SiteSetting::get('about_designer_name', 'Emily Royce') }}</h4>
+                                <p class="text-xs text-[#C5A880]">{{ \App\Models\SiteSetting::get('about_designer_title', 'University Architecture Scholar & Consultant') }}</p>
                             </div>
-                            <a href="mailto:emily@emilyroyce.com" class="w-9 h-9 rounded-full bg-[#C5A880]/20 border border-[#C5A880] flex items-center justify-center text-[#C5A880] hover:bg-[#C5A880] hover:text-black transition-colors">
+                            <a href="mailto:{{ \App\Models\SiteSetting::get('contact_email', 'emily@emilyroyce.com') }}" class="w-9 h-9 rounded-full bg-[#C5A880]/20 border border-[#C5A880] flex items-center justify-center text-[#C5A880] hover:bg-[#C5A880] hover:text-black transition-colors">
                                 <i class="fa-solid fa-envelope text-xs"></i>
                             </a>
                         </div>
@@ -116,12 +117,11 @@
                 </div>
                 
                 <h2 class="text-3xl sm:text-5xl font-heading font-bold text-white leading-tight">
-                    Bridging Academic Excellence & <br>
-                    <span class="gold-gradient-text">Practical Architectural Innovation</span>
+                    {{ \App\Models\SiteSetting::get('about_heading', 'Bridging Academic Excellence & Practical Architectural Innovation') }}
                 </h2>
 
                 <p class="text-gray-300 text-base leading-relaxed">
-                    Currently completing advanced studies in <strong>Design & Architecture at University</strong>, Emily Royce combines rigorous structural principles with modern parametric design and high-precision spatial layout techniques.
+                    {{ \App\Models\SiteSetting::get('about_bio', 'Currently completing advanced studies in Design & Architecture at University, Emily Royce combines rigorous structural principles with modern parametric design and high-precision spatial layout techniques.') }}
                 </p>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
@@ -231,7 +231,7 @@
     </div>
 </section>
 
-<!-- ================= FEATURED ARCHITECTURAL PROJECTS (FOSTER & PARTNERS STYLE) ================= -->
+<!-- ================= FEATURED ARCHITECTURAL PROJECTS ================= -->
 <section class="py-24 bg-[#0D0D0E]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -297,7 +297,7 @@
     </div>
 </section>
 
-<!-- ================= FLOOR PLAN SERVICES HUB (INTERINFINITY / SMART PROPERTY SERVICE STYLE) ================= -->
+<!-- ================= FLOOR PLAN SERVICES HUB ================= -->
 <section class="py-24 bg-[#111215] border-t border-white/5 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -442,7 +442,7 @@
             <span class="gold-gradient-text">Let's Design Together</span>
         </h2>
         <p class="text-gray-300 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            Whether you require high-end architectural concepts, rapid 2D/3D property floor plans, or land registry documentation, Emily Royce Architecture delivers uncompromised quality.
+            Whether you require high-end architectural concepts, rapid 2D/3D property floor plans, or land registry documentation, {{ \App\Models\SiteSetting::get('about_designer_name', 'Emily Royce') }} Architecture delivers uncompromised quality.
         </p>
         <div class="pt-4">
             <a href="{{ route('contact') }}" class="inline-flex items-center space-x-3 px-10 py-5 bg-[#C5A880] text-black font-heading font-bold text-sm uppercase tracking-wider hover:bg-white transition-all shadow-2xl shadow-[#C5A880]/25 rounded-xl">

@@ -11,6 +11,32 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     /**
+     * Helper to process file upload or return URL string fallback
+     */
+    private function processUpload(Request $request, string $fileInputName, ?string $urlInputName = null, ?string $currentFallback = null): ?string
+    {
+        if ($request->hasFile($fileInputName)) {
+            $file = $request->file($fileInputName);
+            $filename = time() . '_' . rand(1000, 9999) . '.' . $file->getClientOriginalExtension();
+            
+            // Ensure public/uploads directory exists
+            $uploadPath = public_path('uploads');
+            if (!file_exists($uploadPath)) {
+                mkdir($uploadPath, 0777, true);
+            }
+
+            $file->move($uploadPath, $filename);
+            return '/uploads/' . $filename;
+        }
+
+        if ($urlInputName && $request->filled($urlInputName)) {
+            return $request->input($urlInputName);
+        }
+
+        return $currentFallback;
+    }
+
+    /**
      * Dashboard Overview
      */
     public function dashboard()
@@ -35,13 +61,27 @@ class AdminController extends Controller
 
     public function updateSettings(Request $request)
     {
-        $inputs = $request->except('_token');
+        $inputs = $request->except(['_token', 'hero_image_1_file', 'hero_image_2_file', 'hero_image_3_file', 'about_designer_image_file']);
+
+        // Process File Uploads for Hero Slider & Profile Picture
+        if ($uploadedImg1 = $this->processUpload($request, 'hero_image_1_file', 'hero_image_1')) {
+            $inputs['hero_image_1'] = $uploadedImg1;
+        }
+        if ($uploadedImg2 = $this->processUpload($request, 'hero_image_2_file', 'hero_image_2')) {
+            $inputs['hero_image_2'] = $uploadedImg2;
+        }
+        if ($uploadedImg3 = $this->processUpload($request, 'hero_image_3_file', 'hero_image_3')) {
+            $inputs['hero_image_3'] = $uploadedImg3;
+        }
+        if ($uploadedProfile = $this->processUpload($request, 'about_designer_image_file', 'about_designer_image')) {
+            $inputs['about_designer_image'] = $uploadedProfile;
+        }
 
         foreach ($inputs as $key => $val) {
             SiteSetting::set($key, $val ?? '');
         }
 
-        return redirect()->back()->with('success', 'All site content, banners, headings, and images updated successfully!');
+        return redirect()->back()->with('success', 'All site content, banners, headings, and uploaded photos updated successfully!');
     }
 
     /**
@@ -71,10 +111,13 @@ class AdminController extends Controller
             'overview' => 'required|string',
             'concept_design' => 'nullable|string',
             'sustainability_specs' => 'nullable|string',
-            'hero_image' => 'required|string',
+            'hero_image' => 'nullable|string',
             'blueprint_image' => 'nullable|string',
             'featured' => 'nullable|boolean',
         ]);
+
+        $validated['hero_image'] = $this->processUpload($request, 'hero_image_file', 'hero_image') ?? 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop';
+        $validated['blueprint_image'] = $this->processUpload($request, 'blueprint_image_file', 'blueprint_image');
 
         $validated['slug'] = \Illuminate\Support\Str::slug($validated['title']) . '-' . rand(100, 999);
         $validated['featured'] = $request->has('featured');
@@ -105,10 +148,20 @@ class AdminController extends Controller
             'overview' => 'required|string',
             'concept_design' => 'nullable|string',
             'sustainability_specs' => 'nullable|string',
-            'hero_image' => 'required|string',
+            'hero_image' => 'nullable|string',
             'blueprint_image' => 'nullable|string',
             'featured' => 'nullable|boolean',
         ]);
+
+        $uploadedHero = $this->processUpload($request, 'hero_image_file', 'hero_image', $project->hero_image);
+        if ($uploadedHero) {
+            $validated['hero_image'] = $uploadedHero;
+        }
+
+        $uploadedBlueprint = $this->processUpload($request, 'blueprint_image_file', 'blueprint_image', $project->blueprint_image);
+        if ($uploadedBlueprint) {
+            $validated['blueprint_image'] = $uploadedBlueprint;
+        }
 
         $validated['featured'] = $request->has('featured');
 
@@ -149,9 +202,10 @@ class AdminController extends Controller
             'turnaround_time' => 'required|string|max:100',
             'starting_price' => 'required|numeric',
             'icon' => 'required|string',
-            'featured_image' => 'required|string',
+            'featured_image' => 'nullable|string',
         ]);
 
+        $validated['featured_image'] = $this->processUpload($request, 'featured_image_file', 'featured_image') ?? 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1200&auto=format&fit=crop';
         $validated['slug'] = \Illuminate\Support\Str::slug($validated['title']);
         $validated['featured'] = true;
 
@@ -178,8 +232,13 @@ class AdminController extends Controller
             'turnaround_time' => 'required|string|max:100',
             'starting_price' => 'required|numeric',
             'icon' => 'required|string',
-            'featured_image' => 'required|string',
+            'featured_image' => 'nullable|string',
         ]);
+
+        $uploadedServiceImg = $this->processUpload($request, 'featured_image_file', 'featured_image', $service->featured_image);
+        if ($uploadedServiceImg) {
+            $validated['featured_image'] = $uploadedServiceImg;
+        }
 
         $service->update($validated);
 

@@ -6,10 +6,11 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\FloorPlanController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminAuthController;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Public Web Routes
 |--------------------------------------------------------------------------
 */
 
@@ -30,10 +31,19 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 
 /*
 |--------------------------------------------------------------------------
-| Secret Admin Portal & CMS Routes (Hidden from Frontend UI)
+| Admin Authentication Routes (Hidden Secret Login)
 |--------------------------------------------------------------------------
 */
-Route::prefix('studio-cms-portal')->group(function () {
+Route::get('/studio-cms-portal/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/studio-cms-portal/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
+Route::post('/studio-cms-portal/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+
+/*
+|--------------------------------------------------------------------------
+| Protected Secret Admin Portal & CMS Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('studio-cms-portal')->middleware(['auth'])->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     
     // CMS Site Settings

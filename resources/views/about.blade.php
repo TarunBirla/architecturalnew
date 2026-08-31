@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'About Emily Royce | Design & Architecture Studio')
+@section('title', 'About ' . \App\Models\SiteSetting::get('about_designer_name', 'Emily Royce') . ' | Design & Architecture Studio')
 
 @section('content')
 
@@ -11,23 +11,23 @@
             
             <div class="lg:col-span-5 relative">
                 <div class="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop" 
-                         alt="Emily Royce" 
+                    <img src="{{ \App\Models\SiteSetting::get('about_designer_image', 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop') }}" 
+                         alt="{{ \App\Models\SiteSetting::get('about_designer_name', 'Emily Royce') }}" 
                          class="w-full h-[500px] object-cover object-center">
                 </div>
             </div>
 
             <div class="lg:col-span-7 space-y-6">
                 <div class="inline-block px-3 py-1 bg-[#C5A880]/15 border border-[#C5A880]/30 rounded-full text-xs font-heading font-semibold uppercase tracking-widest text-[#C5A880]">
-                    Architectural Scholar & Consultant
+                    {{ \App\Models\SiteSetting::get('about_designer_title', 'University Architecture Scholar & Consultant') }}
                 </div>
 
                 <h1 class="text-4xl sm:text-6xl font-heading font-bold text-white tracking-tight">
-                    Emily <span class="gold-gradient-text">Royce</span>
+                    {{ \App\Models\SiteSetting::get('about_designer_name', 'Emily Royce') }}
                 </h1>
 
                 <p class="text-gray-300 text-base sm:text-lg leading-relaxed font-light">
-                    Currently attending <strong>University studying Design & Architecture</strong>, Emily Royce is dedicated to exploring the intersection of parametric form-making, carbon-neutral materials, and high-precision spatial floor planning.
+                    {{ \App\Models\SiteSetting::get('about_bio', 'Currently completing advanced studies in Design & Architecture at University, Emily Royce is dedicated to exploring the intersection of parametric form-making, carbon-neutral materials, and high-precision spatial floor planning.') }}
                 </p>
 
                 <div class="p-4 glass-card rounded-xl border border-[#C5A880]/30 flex items-center space-x-4">
@@ -35,14 +35,14 @@
                         <i class="fa-solid fa-graduation-cap"></i>
                     </div>
                     <div>
-                        <h4 class="font-heading font-bold text-white text-sm">University Architecture Department</h4>
-                        <p class="text-xs text-gray-400">Focus: Sustainable Parametric Canopy & Spatial CAD Optimization</p>
+                        <h4 class="font-heading font-bold text-white text-sm">{{ \App\Models\SiteSetting::get('about_dept_title', 'University Architecture Department') }}</h4>
+                        <p class="text-xs text-gray-400">{{ \App\Models\SiteSetting::get('about_dept_subtitle', 'Focus: Sustainable Parametric Canopy & Spatial CAD Optimization') }}</p>
                     </div>
                 </div>
 
                 <div class="pt-4 flex flex-wrap gap-4">
-                    <a href="mailto:emily@emilyroyce.com" class="px-6 py-3.5 bg-[#C5A880] text-black font-heading font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-white transition-all shadow-lg shadow-[#C5A880]/20">
-                        Email emily@emilyroyce.com
+                    <a href="mailto:{{ \App\Models\SiteSetting::get('contact_email', 'emily@emilyroyce.com') }}" class="px-6 py-3.5 bg-[#C5A880] text-black font-heading font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-white transition-all shadow-lg shadow-[#C5A880]/20">
+                        Email {{ \App\Models\SiteSetting::get('contact_email', 'emily@emilyroyce.com') }}
                     </a>
                     <a href="{{ route('contact') }}" class="px-6 py-3.5 border border-white/20 hover:border-[#C5A880] text-white hover:text-[#C5A880] font-heading font-bold text-xs uppercase tracking-wider rounded-xl transition-colors">
                         Book Consultation

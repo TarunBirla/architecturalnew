@@ -272,10 +272,7 @@
                         </li>
                         <li class="flex items-center space-x-2">
                             <i class="fa-solid fa-location-dot text-[#C5A880]"></i>
-                            <span>London & Cambridge Studio, UK</span>
-                        </li>
-                        <li class="flex items-center space-x-2 pt-2">
-                            <a href="{{ route('admin.inquiries') }}" class="text-[10px] text-gray-600 hover:text-gray-400">Studio Inquiry Portal</a>
+                            <span>{{ \App\Models\SiteSetting::get('contact_location', 'London & Cambridge Studio, UK') }}</span>
                         </li>
                     </ul>
                 </div>

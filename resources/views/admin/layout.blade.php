@@ -93,12 +93,20 @@
             </nav>
         </div>
 
-        <!-- Live Site Button -->
-        <div class="pt-6 border-t border-brand-border">
-            <a href="{{ route('home') }}" target="_blank" class="flex items-center justify-center space-x-2 w-full py-3 bg-white/5 hover:bg-[#C5A880] text-gray-300 hover:text-black rounded-xl text-xs font-heading font-bold uppercase transition-all">
+        <!-- Footer Actions: Live Site & Logout -->
+        <div class="pt-6 border-t border-brand-border space-y-3">
+            <a href="{{ route('home') }}" target="_blank" class="flex items-center justify-center space-x-2 w-full py-2.5 bg-white/5 hover:bg-[#C5A880] text-gray-300 hover:text-black rounded-xl text-xs font-heading font-bold uppercase transition-all">
                 <span>Preview Live Site</span>
                 <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
             </a>
+
+            <form action="{{ route('admin.logout') }}" method="POST" class="w-full">
+                @csrf
+                <button type="submit" class="flex items-center justify-center space-x-2 w-full py-2.5 bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white rounded-xl text-xs font-heading font-bold uppercase transition-colors">
+                    <i class="fa-solid fa-right-from-bracket text-xs"></i>
+                    <span>Admin Logout</span>
+                </button>
+            </form>
         </div>
     </aside>
 

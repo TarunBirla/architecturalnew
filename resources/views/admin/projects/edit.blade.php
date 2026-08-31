@@ -9,12 +9,12 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-heading font-bold text-white">Edit Architectural Project</h1>
-            <p class="text-xs text-gray-400 mt-1">Update details for {{ $project->title }}</p>
+            <p class="text-xs text-gray-400 mt-1">Update details & photos for {{ $project->title }}</p>
         </div>
         <a href="{{ route('admin.projects') }}" class="text-xs text-gray-400 hover:text-white">&larr; Back to Projects</a>
     </div>
 
-    <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" class="bg-brand-card p-8 rounded-2xl border border-brand-border space-y-6">
+    <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" enctype="multipart/form-data" class="bg-brand-card p-8 rounded-2xl border border-brand-border space-y-6">
         @csrf
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -84,17 +84,46 @@
                    class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs focus:border-[#C5A880] focus:outline-none">
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2 border-t border-brand-border">
-            <div class="space-y-2">
-                <label class="text-xs font-heading uppercase text-gray-300">Hero Image URL *</label>
-                <input type="text" name="hero_image" value="{{ $project->hero_image }}" required
-                       class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs font-mono focus:border-[#C5A880] focus:outline-none">
+        <!-- File Upload Section for Hero Image & Blueprint CAD Image with Previews -->
+        <div class="space-y-6 pt-4 border-t border-brand-border">
+            <!-- Hero Image Upload -->
+            <div class="p-4 bg-black/40 rounded-xl border border-white/5 grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                <div class="sm:col-span-3">
+                    <span class="text-[10px] text-gray-500 block uppercase font-heading">Active Cover Photo</span>
+                    <img src="{{ $project->hero_image }}" alt="Project Hero" class="w-full h-24 object-cover rounded-lg border border-brand-border mt-1">
+                </div>
+                <div class="sm:col-span-9 space-y-3">
+                    <div>
+                        <label class="text-[11px] text-[#C5A880] font-bold block mb-1">Upload New Cover Photo from Device:</label>
+                        <input type="file" name="hero_image_file" accept="image/*" class="text-xs text-gray-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-[#C5A880] file:text-black hover:file:bg-white cursor-pointer">
+                    </div>
+                    <div>
+                        <label class="text-[11px] text-gray-400 block">Or Paste Image URL:</label>
+                        <input type="text" name="hero_image" value="{{ $project->hero_image }}" class="w-full px-3 py-1.5 bg-black/60 border border-brand-border rounded-lg text-white text-xs font-mono">
+                    </div>
+                </div>
             </div>
 
-            <div class="space-y-2">
-                <label class="text-xs font-heading uppercase text-gray-300">Blueprint CAD Image URL</label>
-                <input type="text" name="blueprint_image" value="{{ $project->blueprint_image }}"
-                       class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs font-mono focus:border-[#C5A880] focus:outline-none">
+            <!-- Blueprint CAD Image Upload -->
+            <div class="p-4 bg-black/40 rounded-xl border border-white/5 grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                <div class="sm:col-span-3">
+                    <span class="text-[10px] text-gray-500 block uppercase font-heading">Active Blueprint CAD</span>
+                    @if($project->blueprint_image)
+                        <img src="{{ $project->blueprint_image }}" alt="Blueprint CAD" class="w-full h-24 object-cover rounded-lg border border-brand-border mt-1">
+                    @else
+                        <div class="w-full h-24 bg-black/50 border border-brand-border rounded-lg flex items-center justify-center text-xs text-gray-500">No blueprint</div>
+                    @endif
+                </div>
+                <div class="sm:col-span-9 space-y-3">
+                    <div>
+                        <label class="text-[11px] text-[#C5A880] font-bold block mb-1">Upload New Blueprint Photo from Device:</label>
+                        <input type="file" name="blueprint_image_file" accept="image/*" class="text-xs text-gray-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-[#C5A880] file:text-black hover:file:bg-white cursor-pointer">
+                    </div>
+                    <div>
+                        <label class="text-[11px] text-gray-400 block">Or Paste Blueprint Image URL:</label>
+                        <input type="text" name="blueprint_image" value="{{ $project->blueprint_image }}" class="w-full px-3 py-1.5 bg-black/60 border border-brand-border rounded-lg text-white text-xs font-mono">
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -104,8 +133,9 @@
         </div>
 
         <div class="pt-4">
-            <button type="submit" class="w-full py-4 bg-[#C5A880] text-black font-heading font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-white transition-all shadow-xl shadow-[#C5A880]/20">
-                Update Project Specs
+            <button type="submit" class="w-full py-4 bg-[#C5A880] text-black font-heading font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-white transition-all shadow-xl shadow-[#C5A880]/20 flex items-center justify-center space-x-2">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span>Upload Photos & Update Project</span>
             </button>
         </div>
 

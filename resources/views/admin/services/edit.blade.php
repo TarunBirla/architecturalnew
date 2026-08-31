@@ -9,12 +9,12 @@
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-3xl font-heading font-bold text-white">Edit Floor Plan Service</h1>
-            <p class="text-xs text-gray-400 mt-1">Update details for {{ $service->title }}</p>
+            <p class="text-xs text-gray-400 mt-1">Update details & photo for {{ $service->title }}</p>
         </div>
         <a href="{{ route('admin.services') }}" class="text-xs text-gray-400 hover:text-white">&larr; Back to Services</a>
     </div>
 
-    <form action="{{ route('admin.services.update', $service->id) }}" method="POST" class="bg-brand-card p-8 rounded-2xl border border-brand-border space-y-6">
+    <form action="{{ route('admin.services.update', $service->id) }}" method="POST" enctype="multipart/form-data" class="bg-brand-card p-8 rounded-2xl border border-brand-border space-y-6">
         @csrf
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -71,15 +71,28 @@
                       class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs focus:border-[#C5A880] focus:outline-none">{{ $service->full_description }}</textarea>
         </div>
 
-        <div class="space-y-2">
-            <label class="text-xs font-heading uppercase text-gray-300">Featured Image URL *</label>
-            <input type="text" name="featured_image" value="{{ $service->featured_image }}" required
-                   class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs font-mono">
+        <!-- Featured Service Image Upload with Active Preview -->
+        <div class="p-4 bg-black/40 rounded-xl border border-white/5 grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+            <div class="sm:col-span-3">
+                <span class="text-[10px] text-gray-500 block uppercase font-heading">Active Service Photo</span>
+                <img src="{{ $service->featured_image }}" alt="Service Featured" class="w-full h-24 object-cover rounded-lg border border-brand-border mt-1">
+            </div>
+            <div class="sm:col-span-9 space-y-3">
+                <div>
+                    <label class="text-[11px] text-[#C5A880] font-bold block mb-1">Upload New Photo from Device:</label>
+                    <input type="file" name="featured_image_file" accept="image/*" class="text-xs text-gray-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-[#C5A880] file:text-black hover:file:bg-white cursor-pointer">
+                </div>
+                <div>
+                    <label class="text-[11px] text-gray-400 block">Or Paste Image URL:</label>
+                    <input type="text" name="featured_image" value="{{ $service->featured_image }}" class="w-full px-3 py-1.5 bg-black/60 border border-brand-border rounded-lg text-white text-xs font-mono">
+                </div>
+            </div>
         </div>
 
         <div class="pt-4">
-            <button type="submit" class="w-full py-4 bg-[#C5A880] text-black font-heading font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-white transition-all shadow-xl shadow-[#C5A880]/20">
-                Update Service Details
+            <button type="submit" class="w-full py-4 bg-[#C5A880] text-black font-heading font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-white transition-all shadow-xl shadow-[#C5A880]/20 flex items-center justify-center space-x-2">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span>Upload Photo & Update Service</span>
             </button>
         </div>
 
