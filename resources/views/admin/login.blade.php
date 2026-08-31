@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
 
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -30,6 +31,11 @@
             }
         }
     </script>
+    
+    <!-- Alpine.js CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -66,8 +72,8 @@
             </div>
         @endif
 
-        <!-- Login Form -->
-        <form action="{{ route('admin.login.submit') }}" method="POST" class="space-y-5">
+        <!-- Login Form with Password Show/Hide Toggle -->
+        <form action="{{ route('admin.login.submit') }}" method="POST" class="space-y-5" x-data="{ showPassword: false }">
             @csrf
 
             <div class="space-y-2">
@@ -81,14 +87,22 @@
                 </div>
             </div>
 
+            <!-- Password Field with Eye Toggle Icon -->
             <div class="space-y-2">
                 <label class="text-xs font-heading uppercase tracking-wider text-gray-300">Password</label>
                 <div class="relative">
                     <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-gray-500 text-xs">
                         <i class="fa-solid fa-lock"></i>
                     </span>
-                    <input type="password" name="password" required placeholder="••••••••"
-                           class="w-full pl-10 pr-4 py-3 bg-black/60 border border-white/10 rounded-xl text-white text-sm focus:border-[#C5A880] focus:outline-none transition-colors">
+                    
+                    <input :type="showPassword ? 'text' : 'password'" name="password" required placeholder="••••••••"
+                           class="w-full pl-10 pr-10 py-3 bg-black/60 border border-white/10 rounded-xl text-white text-sm focus:border-[#C5A880] focus:outline-none transition-colors">
+                    
+                    <button type="button" @click="showPassword = !showPassword" 
+                            class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-gray-400 hover:text-[#C5A880] focus:outline-none text-xs transition-colors p-1"
+                            title="Toggle Password Visibility">
+                        <i class="fa-solid" :class="showPassword ? 'fa-eye-slash text-[#C5A880]' : 'fa-eye'"></i>
+                    </button>
                 </div>
             </div>
 
@@ -106,9 +120,7 @@
             </button>
         </form>
 
-        <div class="pt-4 text-center text-[11px] text-gray-500 font-mono border-t border-white/5">
-            Default Credentials: <code>admin@emilyroyce.com</code> / <code>password123</code>
-        </div>
+       
     </div>
 
 </body>
