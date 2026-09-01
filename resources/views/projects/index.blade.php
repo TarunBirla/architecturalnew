@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Architectural Portfolio & Projects | Emily Royce')
+@section('title', 'Architectural Projects Catalog | Emily Royce')
 
 @section('content')
 
@@ -9,13 +9,13 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl space-y-4">
             <div class="inline-block px-3 py-1 bg-[#C5A880]/15 border border-[#C5A880]/30 rounded-full text-xs font-heading font-semibold uppercase tracking-widest text-[#C5A880]">
-                Architecture & Design Catalog
+                Grand Architecture & Spatial Design
             </div>
             <h1 class="text-4xl sm:text-6xl font-heading font-bold text-white tracking-tight">
-                Architectural <span class="gold-gradient-text">Portfolio Projects</span>
+                Architectural <span class="gold-gradient-text">Projects Catalog</span>
             </h1>
             <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
-                Explore a curated selection of residential developments, academic research structures, vertical workplace towers, and specialized floor plan layouts.
+                Explore our portfolio of luxury hotels & resorts, high-rise corporate office towers, and grand estate rest-designs.
             </p>
         </div>
     </div>
@@ -81,6 +81,13 @@
                     <p class="text-gray-400 text-sm">No projects found in this category.</p>
                 </div>
             @endforelse
+        </div>
+
+        <!-- Pagination Section -->
+        <div class="mt-16 flex items-center justify-center">
+            <div class="glass-card px-6 py-4 rounded-2xl border border-white/10">
+                {{ $projects->links() }}
+            </div>
         </div>
 
     </div>

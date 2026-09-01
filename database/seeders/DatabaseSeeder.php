@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             ProjectSeeder::class,
             FloorPlanServiceSeeder::class,
             SiteSettingSeeder::class,
+            GallerySeeder::class,
         ]);
     }
 }

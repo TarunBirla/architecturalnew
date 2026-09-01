@@ -20,38 +20,36 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div class="space-y-2">
                 <label class="text-xs font-heading uppercase text-gray-300">Project Title *</label>
-                <input type="text" name="title" required placeholder="e.g. Modern Glass Pavilion"
+                <input type="text" name="title" required placeholder="e.g. The Azure Horizon Resort & Spa"
                        class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-sm font-bold focus:border-[#C5A880] focus:outline-none">
             </div>
 
             <div class="space-y-2">
                 <label class="text-xs font-heading uppercase text-gray-300">Category *</label>
                 <select name="category" required class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs focus:border-[#C5A880] focus:outline-none">
-                    <option value="Residential">Residential</option>
-                    <option value="Commercial">Commercial</option>
-                    <option value="Academic & Research">Academic & Research</option>
-                    <option value="Floor Planning">Floor Planning</option>
-                    <option value="Urban Design">Urban Design</option>
+                    <option value="Luxury Hotels & Resorts">Luxury Hotels & Resorts</option>
+                    <option value="Corporate Offices & Towers">Corporate Offices & Towers</option>
+                    <option value="Luxury Estates & House Redesign">Luxury Estates & House Redesign</option>
                 </select>
             </div>
         </div>
 
         <div class="space-y-2">
             <label class="text-xs font-heading uppercase text-gray-300">Subtitle / Tagline</label>
-            <input type="text" name="subtitle" placeholder="e.g. Parametric Timber Structure & Daylight Optimization"
+            <input type="text" name="subtitle" placeholder="e.g. 5-Star Oceanfront Pavilion & Masterplan"
                    class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs focus:border-[#C5A880] focus:outline-none">
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div class="space-y-2">
                 <label class="text-xs font-heading uppercase text-gray-300">Client</label>
-                <input type="text" name="client" placeholder="e.g. Private Client"
+                <input type="text" name="client" placeholder="e.g. Azure Hospitality Syndicate"
                        class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs focus:border-[#C5A880] focus:outline-none">
             </div>
 
             <div class="space-y-2">
                 <label class="text-xs font-heading uppercase text-gray-300">Location</label>
-                <input type="text" name="location" placeholder="e.g. Kensington, London"
+                <input type="text" name="location" placeholder="e.g. Maldives Atoll / Mayfair London"
                        class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs focus:border-[#C5A880] focus:outline-none">
             </div>
 
@@ -60,7 +58,7 @@
                 <div class="flex space-x-2">
                     <input type="number" name="year" value="{{ date('Y') }}" placeholder="2026"
                            class="w-1/2 px-3 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs font-mono">
-                    <input type="text" name="area_sqm" placeholder="680 m²"
+                    <input type="text" name="area_sqm" placeholder="42,000 m²"
                            class="w-1/2 px-3 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs font-mono">
                 </div>
             </div>
@@ -80,7 +78,7 @@
 
         <div class="space-y-2">
             <label class="text-xs font-heading uppercase text-gray-300">Sustainability & Specs</label>
-            <input type="text" name="sustainability_specs" placeholder="e.g. BREEAM Outstanding Target • Photovoltaic Integrated Glass"
+            <input type="text" name="sustainability_specs" placeholder="e.g. LEED Platinum Target • Solar Canopy Matrix"
                    class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs focus:border-[#C5A880] focus:outline-none">
         </div>
 

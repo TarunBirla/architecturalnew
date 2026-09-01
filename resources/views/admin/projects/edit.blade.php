@@ -27,11 +27,9 @@
             <div class="space-y-2">
                 <label class="text-xs font-heading uppercase text-gray-300">Category *</label>
                 <select name="category" required class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs focus:border-[#C5A880] focus:outline-none">
-                    <option value="Residential" {{ $project->category == 'Residential' ? 'selected' : '' }}>Residential</option>
-                    <option value="Commercial" {{ $project->category == 'Commercial' ? 'selected' : '' }}>Commercial</option>
-                    <option value="Academic & Research" {{ $project->category == 'Academic & Research' ? 'selected' : '' }}>Academic & Research</option>
-                    <option value="Floor Planning" {{ $project->category == 'Floor Planning' ? 'selected' : '' }}>Floor Planning</option>
-                    <option value="Urban Design" {{ $project->category == 'Urban Design' ? 'selected' : '' }}>Urban Design</option>
+                    <option value="Luxury Hotels & Resorts" {{ $project->category == 'Luxury Hotels & Resorts' ? 'selected' : '' }}>Luxury Hotels & Resorts</option>
+                    <option value="Corporate Offices & Towers" {{ $project->category == 'Corporate Offices & Towers' ? 'selected' : '' }}>Corporate Offices & Towers</option>
+                    <option value="Luxury Estates & House Redesign" {{ $project->category == 'Luxury Estates & House Redesign' ? 'selected' : '' }}>Luxury Estates & House Redesign</option>
                 </select>
             </div>
         </div>

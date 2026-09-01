@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\FloorPlanController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminAuthController;
@@ -24,6 +25,9 @@ Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projec
 // Floor Planning Services
 Route::get('/floor-plans', [FloorPlanController::class, 'index'])->name('floor-plans.index');
 Route::get('/floor-plans/{slug}', [FloorPlanController::class, 'show'])->name('floor-plans.show');
+
+// Public Photo Gallery
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
 
 // Contact & Inquiries
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
@@ -49,6 +53,11 @@ Route::prefix('studio-cms-portal')->middleware(['auth'])->group(function () {
     // CMS Site Settings
     Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
     Route::post('/settings', [AdminController::class, 'updateSettings'])->name('admin.settings.update');
+
+    // Photo Gallery CMS
+    Route::get('/gallery', [AdminController::class, 'gallery'])->name('admin.gallery');
+    Route::post('/gallery', [AdminController::class, 'storeGallery'])->name('admin.gallery.store');
+    Route::post('/gallery/{id}/delete', [AdminController::class, 'destroyGallery'])->name('admin.gallery.destroy');
 
     // Projects CRUD
     Route::get('/projects', [AdminController::class, 'projects'])->name('admin.projects');

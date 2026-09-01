@@ -16,8 +16,15 @@ class ProjectController extends Controller
             $query->where('category', $category);
         }
         
-        $projects = $query->orderBy('sort_order')->get();
-        $categories = ['All', 'Residential', 'Commercial', 'Academic & Research', 'Floor Planning'];
+        // Paginate 6 projects per page
+        $projects = $query->orderBy('sort_order')->paginate(6)->withQueryString();
+        
+        $categories = [
+            'All',
+            'Luxury Hotels & Resorts',
+            'Corporate Offices & Towers',
+            'Luxury Estates & House Redesign'
+        ];
 
         return view('projects.index', compact('projects', 'categories', 'category'));
     }
@@ -25,6 +32,7 @@ class ProjectController extends Controller
     public function show($slug)
     {
         $project = Project::where('slug', $slug)->firstOrFail();
+        
         $relatedProjects = Project::where('id', '!=', $project->id)
             ->where('category', $project->category)
             ->take(3)

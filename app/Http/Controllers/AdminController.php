@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\FloorPlanService;
 use App\Models\Inquiry;
 use App\Models\SiteSetting;
+use App\Models\Gallery;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -19,7 +20,6 @@ class AdminController extends Controller
             $file = $request->file($fileInputName);
             $filename = time() . '_' . rand(1000, 9999) . '.' . $file->getClientOriginalExtension();
             
-            // Ensure public/uploads directory exists
             $uploadPath = public_path('uploads');
             if (!file_exists($uploadPath)) {
                 mkdir($uploadPath, 0777, true);
@@ -44,10 +44,51 @@ class AdminController extends Controller
         $projectCount = Project::count();
         $serviceCount = FloorPlanService::count();
         $inquiryCount = Inquiry::count();
+        $galleryCount = Gallery::count();
         $pendingInquiries = Inquiry::where('status', 'pending')->count();
         $recentInquiries = Inquiry::orderBy('created_at', 'desc')->take(5)->get();
 
-        return view('admin.dashboard', compact('projectCount', 'serviceCount', 'inquiryCount', 'pendingInquiries', 'recentInquiries'));
+        return view('admin.dashboard', compact('projectCount', 'serviceCount', 'inquiryCount', 'galleryCount', 'pendingInquiries', 'recentInquiries'));
+    }
+
+    /**
+     * Gallery Management (CMS Upload)
+     */
+    public function gallery()
+    {
+        $galleries = Gallery::orderBy('created_at', 'desc')->get();
+        return view('admin.gallery.index', compact('galleries'));
+    }
+
+    public function storeGallery(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'caption' => 'nullable|string|max:255',
+            'aspect_ratio' => 'required|string|in:tall,wide,square',
+            'image_url' => 'nullable|string',
+        ]);
+
+        $imagePath = $this->processUpload($request, 'image_file', 'image_url');
+        if (!$imagePath) {
+            return redirect()->back()->withErrors(['image_file' => 'Please upload an image file or provide an image URL.']);
+        }
+
+        $validated['image_url'] = $imagePath;
+        $validated['sort_order'] = 0;
+
+        Gallery::create($validated);
+
+        return redirect()->route('admin.gallery')->with('success', 'New architectural photo uploaded to gallery successfully!');
+    }
+
+    public function destroyGallery($id)
+    {
+        $item = Gallery::findOrFail($id);
+        $item->delete();
+
+        return redirect()->route('admin.gallery')->with('success', 'Photo removed from gallery successfully.');
     }
 
     /**
@@ -63,7 +104,6 @@ class AdminController extends Controller
     {
         $inputs = $request->except(['_token', 'hero_image_1_file', 'hero_image_2_file', 'hero_image_3_file', 'about_designer_image_file']);
 
-        // Process File Uploads for Hero Slider & Profile Picture
         if ($uploadedImg1 = $this->processUpload($request, 'hero_image_1_file', 'hero_image_1')) {
             $inputs['hero_image_1'] = $uploadedImg1;
         }

@@ -161,6 +161,10 @@
                     <span>Floor Plans</span>
                     <span class="px-1.5 py-0.5 text-[9px] bg-[#C5A880]/20 text-[#C5A880] border border-[#C5A880]/30 rounded uppercase font-bold">2D/3D</span>
                 </a>
+                <a href="{{ route('gallery.index') }}" class="{{ request()->routeIs('gallery.*') ? 'text-[#C5A880] font-semibold' : 'text-gray-300 hover:text-white' }} transition-colors py-1 relative group">
+                    Photo Gallery
+                    <span class="absolute bottom-0 left-0 w-full h-[2px] bg-[#C5A880] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 {{ request()->routeIs('gallery.*') ? 'scale-x-100' : '' }}"></span>
+                </a>
                 <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'text-[#C5A880] font-semibold' : 'text-gray-300 hover:text-white' }} transition-colors py-1 relative group">
                     About Emily
                     <span class="absolute bottom-0 left-0 w-full h-[2px] bg-[#C5A880] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 {{ request()->routeIs('about') ? 'scale-x-100' : '' }}"></span>
@@ -220,7 +224,7 @@
     </main>
 
     <!-- Studio Footer -->
-    <footer class="relative z-10 bg-[#09090A] border-t border-white/10 pt-16 pb-12 mt-24">
+    <footer class="relative z-10 bg-[#09090A] border-t border-white/10 pt-16 pb-12 ">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
                 <!-- Column 1: Studio Info -->
