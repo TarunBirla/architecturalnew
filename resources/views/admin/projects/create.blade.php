@@ -27,9 +27,9 @@
             <div class="space-y-2">
                 <label class="text-xs font-heading uppercase text-gray-300">Category *</label>
                 <select name="category" required class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs focus:border-[#C5A880] focus:outline-none">
-                    <option value="Luxury Hotels & Resorts">Luxury Hotels & Resorts</option>
-                    <option value="Corporate Offices & Towers">Corporate Offices & Towers</option>
-                    <option value="Luxury Estates & House Redesign">Luxury Estates & House Redesign</option>
+                    @foreach($categories as $cat)
+                        <option value="{{ $cat->name }}">{{ $cat->name }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>

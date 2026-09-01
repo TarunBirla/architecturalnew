@@ -8,6 +8,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,12 @@ Route::prefix('studio-cms-portal')->middleware(['auth'])->group(function () {
     // CMS Site Settings
     Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
     Route::post('/settings', [AdminController::class, 'updateSettings'])->name('admin.settings.update');
+
+    // Dynamic Category CMS Manager
+    Route::get('/categories', [CategoryController::class, 'adminIndex'])->name('admin.categories');
+    Route::post('/categories', [CategoryController::class, 'store'])->name('admin.categories.store');
+    Route::post('/categories/{id}/edit', [CategoryController::class, 'update'])->name('admin.categories.update');
+    Route::post('/categories/{id}/delete', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
 
     // Photo Gallery CMS
     Route::get('/gallery', [AdminController::class, 'gallery'])->name('admin.gallery');

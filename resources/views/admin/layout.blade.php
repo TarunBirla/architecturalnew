@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
 
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     <!-- Tailwind CSS & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -73,9 +76,15 @@
                     <span>Manage Site CMS</span>
                 </a>
 
+                <a href="{{ route('admin.categories') }}" 
+                   class="flex items-center space-x-3 px-4 py-3 rounded-xl transition-colors {{ request()->routeIs('admin.categories*') ? 'bg-[#C5A880] text-black font-bold' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
+                    <i class="fa-solid fa-tags w-5"></i>
+                    <span>Manage Categories</span>
+                </a>
+
                 <a href="{{ route('admin.gallery') }}" 
                    class="flex items-center space-x-3 px-4 py-3 rounded-xl transition-colors {{ request()->routeIs('admin.gallery*') ? 'bg-[#C5A880] text-black font-bold' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
-                    <i class="fa-solid fa-[#C5A880] fa-images w-5"></i>
+                    <i class="fa-solid fa-images w-5"></i>
                     <span>Photo Gallery CMS</span>
                 </a>
 

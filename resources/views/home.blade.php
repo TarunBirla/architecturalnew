@@ -190,24 +190,13 @@
                     class="px-5 py-2.5 rounded-xl font-heading text-xs font-bold uppercase tracking-wider transition-all duration-300">
                 All Categories
             </button>
-            <button @click="activeTab = 'Luxury Hotels & Resorts'" 
-                    :class="activeTab === 'Luxury Hotels & Resorts' ? 'bg-[#C5A880] text-black shadow-lg shadow-[#C5A880]/20' : 'glass-card text-gray-300 hover:text-white hover:border-[#C5A880]/40'"
-                    class="px-5 py-2.5 rounded-xl font-heading text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center space-x-2">
-                <i class="fa-solid fa-hotel text-xs"></i>
-                <span>Luxury Hotels & Resorts</span>
-            </button>
-            <button @click="activeTab = 'Corporate Offices & Towers'" 
-                    :class="activeTab === 'Corporate Offices & Towers' ? 'bg-[#C5A880] text-black shadow-lg shadow-[#C5A880]/20' : 'glass-card text-gray-300 hover:text-white hover:border-[#C5A880]/40'"
-                    class="px-5 py-2.5 rounded-xl font-heading text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center space-x-2">
-                <i class="fa-solid fa-building text-xs"></i>
-                <span>Corporate Offices</span>
-            </button>
-            <button @click="activeTab = 'Luxury Estates & House Redesign'" 
-                    :class="activeTab === 'Luxury Estates & House Redesign' ? 'bg-[#C5A880] text-black shadow-lg shadow-[#C5A880]/20' : 'glass-card text-gray-300 hover:text-white hover:border-[#C5A880]/40'"
-                    class="px-5 py-2.5 rounded-xl font-heading text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center space-x-2">
-                <i class="fa-solid fa-landmark text-xs"></i>
-                <span>Luxury Estates & Rest-Design</span>
-            </button>
+            @foreach($categories as $cat)
+                <button @click="activeTab = '{{ $cat->name }}'" 
+                        :class="activeTab === '{{ $cat->name }}' ? 'bg-[#C5A880] text-black shadow-lg shadow-[#C5A880]/20' : 'glass-card text-gray-300 hover:text-white hover:border-[#C5A880]/40'"
+                        class="px-5 py-2.5 rounded-xl font-heading text-xs font-bold uppercase tracking-wider transition-all duration-300">
+                    <span>{{ $cat->name }}</span>
+                </button>
+            @endforeach
         </div>
 
         <!-- Top 3 Filtered Projects Grid -->
@@ -293,21 +282,13 @@
                     class="px-5 py-2.5 rounded-xl font-heading text-xs font-bold uppercase tracking-wider transition-all duration-300">
                 All Photos
             </button>
-            <button @click="galleryTab = 'Luxury Hotels & Resorts'" 
-                    :class="galleryTab === 'Luxury Hotels & Resorts' ? 'bg-[#C5A880] text-black shadow-lg shadow-[#C5A880]/20' : 'glass-card text-gray-300 hover:text-white hover:border-[#C5A880]/40'"
-                    class="px-5 py-2.5 rounded-xl font-heading text-xs font-bold uppercase tracking-wider transition-all duration-300">
-                Luxury Hotels & Resorts
-            </button>
-            <button @click="galleryTab = 'Corporate Offices & Towers'" 
-                    :class="galleryTab === 'Corporate Offices & Towers' ? 'bg-[#C5A880] text-black shadow-lg shadow-[#C5A880]/20' : 'glass-card text-gray-300 hover:text-white hover:border-[#C5A880]/40'"
-                    class="px-5 py-2.5 rounded-xl font-heading text-xs font-bold uppercase tracking-wider transition-all duration-300">
-                Corporate Offices & Towers
-            </button>
-            <button @click="galleryTab = 'Luxury Estates & House Redesign'" 
-                    :class="galleryTab === 'Luxury Estates & House Redesign' ? 'bg-[#C5A880] text-black shadow-lg shadow-[#C5A880]/20' : 'glass-card text-gray-300 hover:text-white hover:border-[#C5A880]/40'"
-                    class="px-5 py-2.5 rounded-xl font-heading text-xs font-bold uppercase tracking-wider transition-all duration-300">
-                Luxury Estates & House Redesign
-            </button>
+            @foreach($categories as $cat)
+                <button @click="galleryTab = '{{ $cat->name }}'" 
+                        :class="galleryTab === '{{ $cat->name }}' ? 'bg-[#C5A880] text-black shadow-lg shadow-[#C5A880]/20' : 'glass-card text-gray-300 hover:text-white hover:border-[#C5A880]/40'"
+                        class="px-5 py-2.5 rounded-xl font-heading text-xs font-bold uppercase tracking-wider transition-all duration-300">
+                    <span>{{ $cat->name }}</span>
+                </button>
+            @endforeach
         </div>
 
         <!-- Masonry Photo Grid -->

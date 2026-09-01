@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -19,12 +20,7 @@ class ProjectController extends Controller
         // Paginate 6 projects per page
         $projects = $query->orderBy('sort_order')->paginate(6)->withQueryString();
         
-        $categories = [
-            'All',
-            'Luxury Hotels & Resorts',
-            'Corporate Offices & Towers',
-            'Luxury Estates & House Redesign'
-        ];
+        $categories = array_merge(['All'], Category::orderBy('sort_order')->pluck('name')->toArray());
 
         return view('projects.index', compact('projects', 'categories', 'category'));
     }

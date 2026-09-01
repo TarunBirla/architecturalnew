@@ -7,6 +7,7 @@ use App\Models\FloorPlanService;
 use App\Models\Inquiry;
 use App\Models\SiteSetting;
 use App\Models\Gallery;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -45,10 +46,11 @@ class AdminController extends Controller
         $serviceCount = FloorPlanService::count();
         $inquiryCount = Inquiry::count();
         $galleryCount = Gallery::count();
+        $categoryCount = Category::count();
         $pendingInquiries = Inquiry::where('status', 'pending')->count();
         $recentInquiries = Inquiry::orderBy('created_at', 'desc')->take(5)->get();
 
-        return view('admin.dashboard', compact('projectCount', 'serviceCount', 'inquiryCount', 'galleryCount', 'pendingInquiries', 'recentInquiries'));
+        return view('admin.dashboard', compact('projectCount', 'serviceCount', 'inquiryCount', 'galleryCount', 'categoryCount', 'pendingInquiries', 'recentInquiries'));
     }
 
     /**
@@ -57,7 +59,8 @@ class AdminController extends Controller
     public function gallery()
     {
         $galleries = Gallery::orderBy('created_at', 'desc')->get();
-        return view('admin.gallery.index', compact('galleries'));
+        $categories = Category::orderBy('sort_order')->get();
+        return view('admin.gallery.index', compact('galleries', 'categories'));
     }
 
     public function storeGallery(Request $request)
@@ -135,7 +138,8 @@ class AdminController extends Controller
 
     public function createProject()
     {
-        return view('admin.projects.create');
+        $categories = Category::orderBy('sort_order')->get();
+        return view('admin.projects.create', compact('categories'));
     }
 
     public function storeProject(Request $request)
@@ -170,7 +174,8 @@ class AdminController extends Controller
     public function editProject($id)
     {
         $project = Project::findOrFail($id);
-        return view('admin.projects.edit', compact('project'));
+        $categories = Category::orderBy('sort_order')->get();
+        return view('admin.projects.edit', compact('project', 'categories'));
     }
 
     public function updateProject(Request $request, $id)
