@@ -1,96 +1,73 @@
 @extends('layouts.app')
 
-@section('title', 'About ' . \App\Models\SiteSetting::get('about_designer_name', 'Emily Royce') . ' | Design & Architecture Studio')
+@section('title', 'Meet Emily | Architectural Design & Visualisation')
 
 @section('content')
 
-<!-- Hero Section -->
-<section class="py-20 bg-[#111215] border-b border-white/5 bg-blueprint">
+<!-- Header Banner -->
+<section class="py-16 bg-white border-b border-stone-200 bg-blueprint">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <div class="lg:col-span-5 relative">
-                <div class="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                    <img src="{{ \App\Models\SiteSetting::get('about_designer_image', 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop') }}" 
-                         alt="{{ \App\Models\SiteSetting::get('about_designer_name', 'Emily Royce') }}" 
-                         class="w-full h-[500px] object-cover object-center">
-                </div>
+        <div class="max-w-3xl space-y-4">
+            <div class="inline-block px-3.5 py-1 bg-[#C5A880]/15 border border-[#C5A880]/40 rounded-full text-xs font-heading font-bold uppercase tracking-widest text-[#9E825A]">
+                Architecture & Design Student
             </div>
-
-            <div class="lg:col-span-7 space-y-6">
-                <div class="inline-block px-3 py-1 bg-[#C5A880]/15 border border-[#C5A880]/30 rounded-full text-xs font-heading font-semibold uppercase tracking-widest text-[#C5A880]">
-                    {{ \App\Models\SiteSetting::get('about_designer_title', 'University Architecture Scholar & Consultant') }}
-                </div>
-
-                <h1 class="text-4xl sm:text-6xl font-heading font-bold text-white tracking-tight">
-                    {{ \App\Models\SiteSetting::get('about_designer_name', 'Emily Royce') }}
-                </h1>
-
-                <p class="text-gray-300 text-base sm:text-lg leading-relaxed font-light">
-                    {{ \App\Models\SiteSetting::get('about_bio', 'Currently completing advanced studies in Design & Architecture at University, Emily Royce is dedicated to exploring the intersection of parametric form-making, carbon-neutral materials, and high-precision spatial floor planning.') }}
-                </p>
-
-                <div class="p-4 glass-card rounded-xl border border-[#C5A880]/30 flex items-center space-x-4">
-                    <div class="w-10 h-10 rounded-full bg-[#C5A880]/20 text-[#C5A880] flex items-center justify-center font-bold">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-heading font-bold text-white text-sm">{{ \App\Models\SiteSetting::get('about_dept_title', 'University Architecture Department') }}</h4>
-                        <p class="text-xs text-gray-400">{{ \App\Models\SiteSetting::get('about_dept_subtitle', 'Focus: Sustainable Parametric Canopy & Spatial CAD Optimization') }}</p>
-                    </div>
-                </div>
-
-                <div class="pt-4 flex flex-wrap gap-4">
-                    <a href="mailto:{{ \App\Models\SiteSetting::get('contact_email', 'emily@emilyroyce.com') }}" class="px-6 py-3.5 bg-[#C5A880] text-black font-heading font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-white transition-all shadow-lg shadow-[#C5A880]/20">
-                        Email {{ \App\Models\SiteSetting::get('contact_email', 'emily@emilyroyce.com') }}
-                    </a>
-                    <a href="{{ route('contact') }}" class="px-6 py-3.5 border border-white/20 hover:border-[#C5A880] text-white hover:text-[#C5A880] font-heading font-bold text-xs uppercase tracking-wider rounded-xl transition-colors">
-                        Book Consultation
-                    </a>
-                </div>
-            </div>
-
+            <h1 class="text-4xl sm:text-6xl font-heading font-bold text-[#141518] tracking-tight">
+                MEET <span class="gold-gradient-text">EMILY</span>
+            </h1>
+            <p class="text-[#4A4D57] text-sm sm:text-base leading-relaxed">
+                Creative spatial design, precise floor plans and 3D visualisations.
+            </p>
         </div>
     </div>
 </section>
 
-<!-- Design Philosophy Section -->
-<section class="py-20 bg-[#0D0D0E]">
+<!-- Meet Emily Story -->
+<section class="py-20 bg-[#FBF9F5]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
-            <h2 class="text-3xl font-heading font-bold text-white">
-                Studio Design <span class="gold-gradient-text">Pillars</span>
-            </h2>
-            <p class="text-xs text-gray-400">Core principles guiding every architectural drawing, 3D render, and spatial masterplan.</p>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-5 relative">
+                <div class="rounded-3xl overflow-hidden border border-stone-200 shadow-xl bg-white">
+                    <img src="{{ \App\Models\SiteSetting::get('about_designer_image', 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop') }}" 
+                         alt="Emily Royce - Architecture & Design Student" 
+                         class="w-full h-[520px] object-cover object-center">
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 space-y-6">
+                <div class="space-y-4 text-[#3A3C44] text-base leading-relaxed">
+                    <p class="text-xl font-heading font-bold text-[#141518]">
+                        I'm Emily, an Architecture & Design student with a passion for creating thoughtful, functional and visually refined spaces.
+                    </p>
+                    <p>
+                        My work combines architectural thinking, precise CAD drawing and 3D visualisation to explore how spaces can work better for the people who use them.
+                    </p>
+                    <p>
+                        I'm currently developing my skills through academic projects and independent design work, while building a portfolio focused on spatial planning, visualisation and contemporary design.
+                    </p>
+                </div>
+
+                <!-- Software Expertise Stack -->
+                <div class="space-y-3 pt-4 border-t border-stone-200">
+                    <h4 class="text-xs font-heading font-bold uppercase tracking-wider text-[#9E825A]">Tools & Software Expertise</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3.5 py-1.5 bg-white border border-stone-200 rounded-xl text-xs font-mono font-semibold text-[#141518] shadow-sm">AutoCAD 2D</span>
+                        <span class="px-3.5 py-1.5 bg-white border border-stone-200 rounded-xl text-xs font-mono font-semibold text-[#141518] shadow-sm">Revit BIM</span>
+                        <span class="px-3.5 py-1.5 bg-white border border-stone-200 rounded-xl text-xs font-mono font-semibold text-[#141518] shadow-sm">SketchUp 3D</span>
+                        <span class="px-3.5 py-1.5 bg-white border border-stone-200 rounded-xl text-xs font-mono font-semibold text-[#141518] shadow-sm">Rhino 3D</span>
+                        <span class="px-3.5 py-1.5 bg-white border border-stone-200 rounded-xl text-xs font-mono font-semibold text-[#141518] shadow-sm">V-Ray Render</span>
+                        <span class="px-3.5 py-1.5 bg-white border border-stone-200 rounded-xl text-xs font-mono font-semibold text-[#141518] shadow-sm">Adobe Photoshop</span>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex flex-wrap gap-4">
+                    <a href="{{ route('contact') }}" class="px-8 py-4 bg-[#141518] text-white font-heading font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-[#C5A880] hover:text-black transition-all shadow-md">
+                        Tell Me About Your Project
+                    </a>
+                </div>
+            </div>
+
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="glass-card p-8 rounded-2xl border border-white/5 space-y-4">
-                <div class="w-12 h-12 rounded-xl bg-[#C5A880]/15 text-[#C5A880] flex items-center justify-center font-bold text-xl">01</div>
-                <h3 class="text-xl font-heading font-bold text-white">Spatial Precision</h3>
-                <p class="text-xs text-gray-400 leading-relaxed">
-                    Laser-measured CAD accuracy ensuring 100% compliance with RICS property standards and HM Land Registry rules.
-                </p>
-            </div>
-
-            <div class="glass-card p-8 rounded-2xl border border-white/5 space-y-4">
-                <div class="w-12 h-12 rounded-xl bg-[#C5A880]/15 text-[#C5A880] flex items-center justify-center font-bold text-xl">02</div>
-                <h3 class="text-xl font-heading font-bold text-white">Material Authenticity</h3>
-                <p class="text-xs text-gray-400 leading-relaxed">
-                    Emphasizing natural textures—cross-laminated timber, raw micro-cement, honed limestone, and dynamic solar glass.
-                </p>
-            </div>
-
-            <div class="glass-card p-8 rounded-2xl border border-white/5 space-y-4">
-                <div class="w-12 h-12 rounded-xl bg-[#C5A880]/15 text-[#C5A880] flex items-center justify-center font-bold text-xl">03</div>
-                <h3 class="text-xl font-heading font-bold text-white">Environmental Stewardship</h3>
-                <p class="text-xs text-gray-400 leading-relaxed">
-                    Designing for net-zero carbon operation through daylight optimization and passive ventilation thermal chimneys.
-                </p>
-            </div>
-        </div>
-
     </div>
 </section>
 

@@ -13,33 +13,35 @@ class SiteSettingSeeder extends Seeder
     public function run(): void
     {
         $settings = [
-            // Hero Section
-            ['key' => 'hero_badge_text', 'value' => 'Design & Architecture Studio', 'group' => 'hero'],
-            ['key' => 'hero_headline', 'value' => 'Precision Spatial Architecture & Floor Plans', 'group' => 'hero'],
-            ['key' => 'hero_subheadline', 'value' => 'Elevating spaces through minimalist architectural concepts, 2D/3D CAD floor planning, Land Registry lease plans, and sustainable urban design. Led by Emily Royce.', 'group' => 'hero'],
-            ['key' => 'hero_cta_button_text', 'value' => 'Explore 2D vs 3D Floor Plans', 'group' => 'hero'],
-            ['key' => 'hero_image_1', 'value' => 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop', 'group' => 'hero'],
-            ['key' => 'hero_image_2', 'value' => 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1800&auto=format&fit=crop', 'group' => 'hero'],
-            ['key' => 'hero_image_3', 'value' => 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1800&auto=format&fit=crop', 'group' => 'hero'],
+            // Brand & Hero Titles
+            'hero_badge_text' => 'Architecture & Design Student',
+            'hero_headline' => 'EMILY ROYCE',
+            'hero_subheadline' => 'Creative spatial design, precise floor plans and 3D visualisations.',
 
-            // About Section
-            ['key' => 'about_designer_name', 'value' => 'Emily Royce', 'group' => 'about'],
-            ['key' => 'about_designer_title', 'value' => 'University Architecture Scholar & Consultant', 'group' => 'about'],
-            ['key' => 'about_designer_image', 'value' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop', 'group' => 'about'],
-            ['key' => 'about_heading', 'value' => 'Bridging Academic Excellence & Practical Architectural Innovation', 'group' => 'about'],
-            ['key' => 'about_bio', 'value' => 'Currently completing advanced studies in Design & Architecture at University, Emily Royce combines rigorous structural principles with modern parametric design and high-precision spatial layout techniques.', 'group' => 'about'],
-            ['key' => 'about_dept_title', 'value' => 'University Architecture Department', 'group' => 'about'],
-            ['key' => 'about_dept_subtitle', 'value' => 'Focus: Sustainable Parametric Canopy & Spatial CAD Optimization', 'group' => 'about'],
+            // Meet Emily Personal Story
+            'about_designer_name' => 'Emily Royce',
+            'about_designer_title' => 'Architecture & Design Student',
+            'about_designer_image' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop',
+            'about_heading' => 'MEET EMILY',
+            'about_bio' => "I'm Emily, an Architecture & Design student with a passion for creating thoughtful, functional and visually refined spaces.\n\nMy work combines architectural thinking, precise CAD drawing and 3D visualisation to explore how spaces can work better for the people who use them.\n\nI'm currently developing my skills through academic projects and independent design work, while building a portfolio focused on spatial planning, visualisation and contemporary design.",
 
-            // Contact & Footer Settings
-            ['key' => 'contact_email', 'value' => 'emily@emilyroyce.com', 'group' => 'contact'],
-            ['key' => 'contact_relay_email', 'value' => 'phil.andreson@nexteck.uk', 'group' => 'contact'],
-            ['key' => 'contact_location', 'value' => 'London & Cambridge Studio, United Kingdom', 'group' => 'contact'],
-            ['key' => 'footer_quote', 'value' => '"Architecture is the learned game, correct and magnificent, of forms assembled in the light."', 'group' => 'contact'],
+            // Credibility Statements & Turnaround
+            'land_registry_note' => 'Prepared in accordance with HM Land Registry requirements.',
+            'turnaround_note' => 'Typical turnaround: 24–48 hours (depending on project scope and availability).',
+            'tagline_short' => 'Thoughtful design. Precise drawings.',
+
+            // Contact & Meta
+            'contact_email' => 'emily@emilyroyce.com',
+            'contact_phone' => '+44 7700 900000',
+            'contact_location' => 'London & Cambridge Studio, UK',
+            'footer_quote' => 'Thoughtful design. Precise drawings.',
         ];
 
-        foreach ($settings as $setting) {
-            SiteSetting::set($setting['key'], $setting['value'], $setting['group']);
+        foreach ($settings as $key => $val) {
+            SiteSetting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $val]
+            );
         }
     }
 }

@@ -1,349 +1,116 @@
 @extends('layouts.app')
 
-@section('title', \App\Models\SiteSetting::get('about_designer_name', 'Emily Royce') . ' | Architecture & Spatial Design')
+@section('title', 'Emily Royce | Architectural Design & Visualisation')
 
 @section('content')
 
-<!-- ================= HERO SECTION ================= -->
-<section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-blueprint py-20">
-    <!-- Dark Vignette Overlay -->
-    <div class="absolute inset-0 bg-gradient-to-t from-[#0D0D0E] via-[#0D0D0E]/70 to-transparent z-10"></div>
-    <div class="absolute inset-0 bg-gradient-to-r from-[#0D0D0E] via-transparent to-[#0D0D0E] z-10"></div>
-
-    <!-- Hero Background Image Carousel (Alpine.js) -->
-    <div x-data="{ 
-            slides: [
-                '{{ \App\Models\SiteSetting::get('hero_image_1', 'https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=1800&auto=format&fit=crop') }}',
-                '{{ \App\Models\SiteSetting::get('hero_image_2', 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1800&auto=format&fit=crop') }}',
-                '{{ \App\Models\SiteSetting::get('hero_image_3', 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1800&auto=format&fit=crop') }}'
-            ],
-            active: 0,
-            init() { setInterval(() => { this.active = (this.active + 1) % this.slides.length }, 5500); }
-         }" class="absolute inset-0 z-0">
-        <template x-for="(slide, index) in slides" :key="index">
-            <div x-show="active === index" 
-                 x-transition:enter="transition ease-out duration-1000"
-                 x-transition:enter-start="opacity-0 scale-105"
-                 x-transition:enter-end="opacity-100 scale-100"
-                 x-transition:leave="transition ease-in duration-1000"
-                 x-transition:leave-start="opacity-100 scale-100"
-                 x-transition:leave-end="opacity-0 scale-95"
-                 class="absolute inset-0 bg-cover bg-center"
-                 :style="`background-image: url('${slide}')`">
-            </div>
-        </template>
-    </div>
-
-    <!-- Content -->
-    <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
-        <div class="max-w-3xl space-y-6">
-            <div class="inline-flex items-center space-x-2 px-3 py-1 bg-[#C5A880]/15 border border-[#C5A880]/40 rounded-full">
-                <span class="w-2 h-2 rounded-full bg-[#C5A880] animate-ping"></span>
-                <span class="text-xs font-heading font-semibold uppercase tracking-widest text-[#C5A880]">
-                    {{ \App\Models\SiteSetting::get('hero_badge_text', 'Luxury Hotels, Corporate Offices & Estates') }}
-                </span>
-            </div>
-
-            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-heading font-bold text-white tracking-tight leading-[1.1]">
-                {{ \App\Models\SiteSetting::get('hero_headline', 'Grand Architecture & Spatial Masterplanning') }}
-            </h1>
-
-            <p class="text-base sm:text-xl text-gray-300 font-sans font-light leading-relaxed max-w-2xl">
-                {{ \App\Models\SiteSetting::get('hero_subheadline', 'Specializing in luxury 5-star hotel resorts, corporate office towers, and grand estate rest-design. Led by Emily Royce.') }}
-            </p>
-
-            <div class="pt-4 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
-                <a href="#signature-works" class="w-full sm:w-auto px-8 py-4 bg-[#C5A880] text-black font-heading font-bold text-sm uppercase tracking-wider hover:bg-white transition-all duration-300 shadow-xl shadow-[#C5A880]/20 flex items-center justify-center space-x-3">
-                    <span>Explore Architectural Works</span>
-                    <i class="fa-solid fa-arrow-down text-xs"></i>
-                </a>
-                <a href="{{ route('projects.index') }}" class="w-full sm:w-auto px-8 py-4 border border-white/20 hover:border-[#C5A880] text-white hover:text-[#C5A880] font-heading font-semibold text-sm uppercase tracking-wider transition-all duration-300 flex items-center justify-center space-x-2">
-                    <span>View All Projects</span>
-                </a>
-            </div>
-
-            <!-- Stats Bar -->
-            <div class="pt-10 grid grid-cols-3 gap-6 border-t border-white/10 max-w-lg">
-                <div>
-                    <div class="font-heading text-2xl font-bold text-[#C5A880]">100%</div>
-                    <div class="text-[11px] text-gray-400 uppercase tracking-wider">RICS & Land Registry Compliant</div>
-                </div>
-                <div>
-                    <div class="font-heading text-2xl font-bold text-[#C5A880]">24 - 48h</div>
-                    <div class="text-[11px] text-gray-400 uppercase tracking-wider">CAD & 3D Turnaround</div>
-                </div>
-                <div>
-                    <div class="font-heading text-2xl font-bold text-[#C5A880]">3D VR</div>
-                    <div class="text-[11px] text-gray-400 uppercase tracking-wider">Spatial Walkthroughs</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ================= EMILY ROYCE PROFILE SPOTLIGHT ================= -->
-<section class="py-10 bg-[#111215] border-y border-white/5 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- ================= 1. HERO SECTION (HONEST, PROFESSIONAL & PERSONAL) ================= -->
+<section class="relative min-h-[80vh] flex items-center justify-center bg-blueprint py-16 sm:py-24 border-b border-stone-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <!-- Avatar / Studio Portrait -->
-            <div class="lg:col-span-5 relative">
-                <div class="relative z-10 rounded-2xl overflow-hidden border border-white/10 shadow-2xl group">
-                    <img src="{{ \App\Models\SiteSetting::get('about_designer_image', 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop') }}" 
-                         alt="{{ \App\Models\SiteSetting::get('about_designer_name', 'Emily Royce') }}" 
-                         class="w-full h-[480px] object-cover object-center group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                    
-                    <div class="absolute bottom-6 left-6 right-6 p-4 glass-card rounded-xl">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <h4 class="font-heading text-lg font-bold text-white">{{ \App\Models\SiteSetting::get('about_designer_name', 'Emily Royce') }}</h4>
-                                <p class="text-xs text-[#C5A880]">{{ \App\Models\SiteSetting::get('about_designer_title', 'University Architecture Scholar & Consultant') }}</p>
-                            </div>
-                            <a href="mailto:{{ \App\Models\SiteSetting::get('contact_email', 'emily@emilyroyce.com') }}" class="w-9 h-9 rounded-full bg-[#C5A880]/20 border border-[#C5A880] flex items-center justify-center text-[#C5A880] hover:bg-[#C5A880] hover:text-black transition-colors">
-                                <i class="fa-solid fa-envelope text-xs"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Backdrop Gold Accent Frame -->
-                <div class="absolute -bottom-4 -right-4 w-full h-full border-2 border-[#C5A880]/30 rounded-2xl pointer-events-none -z-0"></div>
-            </div>
 
-            <!-- Text Content -->
-            <div class="lg:col-span-7 space-y-6">
-                <div class="inline-block px-3 py-1 bg-[#C5A880]/10 border border-[#C5A880]/30 rounded-full text-xs font-heading font-semibold uppercase tracking-widest text-[#C5A880]">
-                    About the Lead Designer
+            <!-- Left Column: Honest Positioning -->
+            <div class="lg:col-span-6 space-y-6 text-left">
+                <div class="inline-flex items-center space-x-2 px-4 py-1.5 bg-[#C5A880]/15 border border-[#C5A880]/40 rounded-full shadow-sm">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#C5A880] animate-ping"></span>
+                    <span class="text-xs font-heading font-bold uppercase tracking-widest text-[#9E825A]">
+                        Architecture & Design Student
+                    </span>
                 </div>
-                
-                <h2 class="text-3xl sm:text-5xl font-heading font-bold text-white leading-tight">
-                    {{ \App\Models\SiteSetting::get('about_heading', 'Bridging Academic Excellence & Practical Architectural Innovation') }}
-                </h2>
 
-                <p class="text-gray-300 text-base leading-relaxed">
-                    {{ \App\Models\SiteSetting::get('about_bio', 'Currently completing advanced studies in Design & Architecture at University, Emily Royce combines structural engineering principles with modern parametric design and high-precision spatial layout techniques for luxury hotels, commercial towers, and estate rest-designs.') }}
+                <div class="space-y-2">
+                    <h1 class="text-4xl sm:text-6xl font-heading font-bold text-[#141518] tracking-tight">
+                        EMILY ROYCE
+                    </h1>
+                    <p class="text-lg sm:text-xl font-heading font-bold text-[#9E825A] uppercase tracking-wider">
+                        Architectural Design & Visualisation
+                    </p>
+                </div>
+
+                <p class="text-base sm:text-lg text-[#3A3C44] font-sans leading-relaxed">
+                    Creative spatial design, precise floor plans and 3D visualisations.
                 </p>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                    <div class="glass-card p-4 rounded-xl border border-white/5 space-y-2">
-                        <div class="flex items-center space-x-3 text-[#C5A880]">
-                            <i class="fa-solid fa-hotel text-lg"></i>
-                            <h4 class="font-heading font-bold text-white text-sm">Hotels & Office Masterplans</h4>
-                        </div>
-                        <p class="text-xs text-gray-400">High-capacity hospitality suites & commercial workplace layouts.</p>
-                    </div>
-
-                    <div class="glass-card p-4 rounded-xl border border-white/5 space-y-2">
-                        <div class="flex items-center space-x-3 text-[#C5A880]">
-                            <i class="fa-solid fa-landmark text-lg"></i>
-                            <h4 class="font-heading font-bold text-white text-sm">Estate Rest-Design</h4>
-                        </div>
-                        <p class="text-xs text-gray-400">Historic mansion restoration & luxury penthouse spatial planning.</p>
-                    </div>
-                </div>
-
-                <div class="pt-4 flex items-center space-x-6">
-                    <a href="{{ route('about') }}" class="inline-flex items-center space-x-2 text-sm font-heading font-bold uppercase tracking-wider text-[#C5A880] hover:text-white transition-colors">
-                        <span>Read Full Profile & CV</span>
+                <div class="pt-2 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="{{ route('contact') }}" class="w-full sm:w-auto px-8 py-4 bg-[#141518] text-white hover:bg-[#C5A880] hover:text-black font-heading font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-xl flex items-center justify-center space-x-3 rounded-xl">
+                        <span>Tell Me About Your Project</span>
                         <i class="fa-solid fa-arrow-right text-xs"></i>
                     </a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- ================= SIGNATURE ARCHITECTURAL WORKS (HOMEPAGE TAB FILTER SHOWING TOP 3) ================= -->
-<section id="signature-works" class="py-12 bg-[#0D0D0E]"
-         x-data="{
-            activeTab: 'All',
-            projects: {{ json_encode($allProjects) }},
-            get filteredProjects() {
-                if (this.activeTab === 'All') {
-                    return this.projects.slice(0, 3);
-                }
-                return this.projects.filter(p => p.category === this.activeTab).slice(0, 3);
-            }
-         }">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
-            <div class="space-y-3">
-                <div class="inline-block px-3 py-1 bg-[#C5A880]/15 border border-[#C5A880]/30 rounded-full text-xs font-heading font-semibold uppercase tracking-widest text-[#C5A880]">
-                    Portfolio Showcase
-                </div>
-                <h2 class="text-3xl sm:text-5xl font-heading font-bold text-white">
-                    Signature <span class="gold-gradient-text">Architectural Works</span>
-                </h2>
-            </div>
-            <a href="{{ route('projects.index') }}" class="mt-4 md:mt-0 text-sm font-heading font-bold uppercase tracking-wider text-[#C5A880] hover:text-white transition-colors flex items-center space-x-2">
-                <span>View Full Catalog</span>
-                <i class="fa-solid fa-arrow-right text-xs"></i>
-            </a>
-        </div>
-
-        <!-- Category Filter Tabs on Homepage -->
-        <div class="flex flex-wrap items-center gap-3 mb-10 border-b border-white/10 pb-4">
-            <button @click="activeTab = 'All'" 
-                    :class="activeTab === 'All' ? 'bg-[#C5A880] text-black shadow-lg shadow-[#C5A880]/20' : 'glass-card text-gray-300 hover:text-white hover:border-[#C5A880]/40'"
-                    class="px-5 py-2.5 rounded-xl font-heading text-xs font-bold uppercase tracking-wider transition-all duration-300">
-                All Categories
-            </button>
-            @foreach($categories as $cat)
-                <button @click="activeTab = '{{ $cat->name }}'" 
-                        :class="activeTab === '{{ $cat->name }}' ? 'bg-[#C5A880] text-black shadow-lg shadow-[#C5A880]/20' : 'glass-card text-gray-300 hover:text-white hover:border-[#C5A880]/40'"
-                        class="px-5 py-2.5 rounded-xl font-heading text-xs font-bold uppercase tracking-wider transition-all duration-300">
-                    <span>{{ $cat->name }}</span>
-                </button>
-            @endforeach
-        </div>
-
-        <!-- Top 3 Filtered Projects Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <template x-for="project in filteredProjects" :key="project.id">
-                <div class="glass-card rounded-2xl overflow-hidden group flex flex-col justify-between transition-all duration-500 hover:-translate-y-2">
-                    <div>
-                        <!-- Project Hero Image -->
-                        <div class="relative h-64 overflow-hidden">
-                            <img :src="project.hero_image" 
-                                 :alt="project.title" 
-                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                            
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-                            
-                            <span class="absolute top-4 left-4 px-3 py-1 bg-black/70 backdrop-blur-md rounded-full text-[10px] font-heading font-bold uppercase tracking-wider text-[#C5A880] border border-[#C5A880]/30"
-                                  x-text="project.category">
-                            </span>
-                        </div>
-
-                        <!-- Details -->
-                        <div class="p-6 space-y-3">
-                            <h3 class="text-xl font-heading font-bold text-white group-hover:text-[#C5A880] transition-colors"
-                                x-text="project.title">
-                            </h3>
-                            <p class="text-xs text-gray-400 line-clamp-2"
-                               x-text="project.overview">
-                            </p>
-
-                            <div class="pt-3 border-t border-white/5 flex items-center justify-between text-xs text-gray-400 font-mono">
-                                <span><i class="fa-solid fa-location-dot text-[#C5A880] mr-1"></i> <span x-text="project.location"></span></span>
-                                <span x-text="project.area_sqm"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="px-6 pb-6 pt-2">
-                        <a :href="`/projects/${project.slug}`" class="w-full py-2.5 bg-white/5 hover:bg-[#C5A880] text-gray-300 hover:text-black font-heading font-bold text-xs uppercase tracking-wider rounded-lg transition-all duration-300 flex items-center justify-center space-x-2">
-                            <span>View Case Study</span>
-                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                        </a>
-                    </div>
-                </div>
-            </template>
-        </div>
-
-    </div>
-</section>
-
-<!-- ================= ARCHITECTURAL MASONRY GALLERY SECTION ================= -->
-<section class="py-12 bg-[#111215] border-t border-white/5"
-         x-data="{
-            galleryTab: 'All',
-            items: {{ json_encode($galleryItems) }},
-            get filteredGallery() {
-                if (this.galleryTab === 'All') {
-                    return this.items.slice(0, 6);
-                }
-                return this.items.filter(i => i.category === this.galleryTab).slice(0, 6);
-            }
-         }">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-            <div class="space-y-3">
-                <div class="inline-block px-3 py-1 bg-[#C5A880]/15 border border-[#C5A880]/30 rounded-full text-xs font-heading font-semibold uppercase tracking-widest text-[#C5A880]">
-                    Visual Gallery
-                </div>
-                <h2 class="text-3xl sm:text-5xl font-heading font-bold text-white">
-                    Architectural <span class="gold-gradient-text">Photo Archive</span>
-                </h2>
-            </div>
-            <a href="{{ route('gallery.index') }}" class="mt-4 md:mt-0 text-sm font-heading font-bold uppercase tracking-wider text-[#C5A880] hover:text-white transition-colors flex items-center space-x-2">
-                <span>View Full Photo Gallery</span>
-                <i class="fa-solid fa-arrow-right text-xs"></i>
-            </a>
-        </div>
-
-        <!-- Gallery Category Tabs -->
-        <div class="flex flex-wrap items-center gap-3 mb-10 border-b border-white/10 pb-4">
-            <button @click="galleryTab = 'All'" 
-                    :class="galleryTab === 'All' ? 'bg-[#C5A880] text-black shadow-lg shadow-[#C5A880]/20' : 'glass-card text-gray-300 hover:text-white hover:border-[#C5A880]/40'"
-                    class="px-5 py-2.5 rounded-xl font-heading text-xs font-bold uppercase tracking-wider transition-all duration-300">
-                All Photos
-            </button>
-            @foreach($categories as $cat)
-                <button @click="galleryTab = '{{ $cat->name }}'" 
-                        :class="galleryTab === '{{ $cat->name }}' ? 'bg-[#C5A880] text-black shadow-lg shadow-[#C5A880]/20' : 'glass-card text-gray-300 hover:text-white hover:border-[#C5A880]/40'"
-                        class="px-5 py-2.5 rounded-xl font-heading text-xs font-bold uppercase tracking-wider transition-all duration-300">
-                    <span>{{ $cat->name }}</span>
-                </button>
-            @endforeach
-        </div>
-
-        <!-- Masonry Photo Grid -->
-        <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-            <template x-for="item in filteredGallery" :key="item.id">
-                <div class="break-inside-avoid glass-card rounded-2xl overflow-hidden group border border-white/10 relative transition-all duration-500 hover:-translate-y-1.5 hover:border-[#C5A880]/50">
-                    <a href="{{ route('gallery.index') }}" class="block relative overflow-hidden">
-                        <img :src="item.image_url" 
-                             :alt="item.title" 
-                             class="w-full object-cover group-hover:scale-105 transition-transform duration-700"
-                             :class="item.aspect_ratio === 'tall' ? 'h-96' : (item.aspect_ratio === 'wide' ? 'h-56' : 'h-72')">
-                        
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
-
-                        <span class="absolute top-4 left-4 px-3 py-1 bg-black/70 backdrop-blur-md rounded-full text-[10px] font-heading font-bold uppercase tracking-wider text-[#C5A880] border border-[#C5A880]/30"
-                              x-text="item.category">
-                        </span>
-
-                        <div class="absolute bottom-4 left-4 right-4 space-y-1">
-                            <h4 class="font-heading font-bold text-white text-base group-hover:text-[#C5A880] transition-colors" x-text="item.title"></h4>
-                            <p class="text-xs text-gray-300 font-sans line-clamp-1" x-text="item.caption"></p>
-                        </div>
+                    <a href="#services" class="w-full sm:w-auto px-8 py-4 bg-white border border-stone-300 hover:border-[#C5A880] text-[#141518] hover:text-[#9E825A] font-heading font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center justify-center space-x-2 rounded-xl">
+                        <span>View Services & Rates</span>
                     </a>
                 </div>
-            </template>
-        </div>
 
-        <div class="mt-12 text-center">
-            <a href="{{ route('gallery.index') }}" class="inline-flex items-center space-x-2 px-8 py-3.5 bg-[#C5A880] text-black font-heading font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-white transition-all shadow-lg shadow-[#C5A880]/20">
-                <span>Open Full Architectural Gallery</span>
-                <i class="fa-solid fa-arrow-right text-xs"></i>
-            </a>
-        </div>
+                <!-- Credibility Note -->
+                <div class="pt-6 border-t border-stone-200 flex items-center space-x-6 text-xs text-[#626570]">
+                    <span><i class="fa-solid fa-clock text-[#9E825A] mr-1"></i> Typical turnaround: 24–48 hours</span>
+                    <span><i class="fa-solid fa-check text-[#9E825A] mr-1"></i> HM Land Registry compliant</span>
+                </div>
+            </div>
 
+            <!-- Right Column: Featured Visual -->
+            <div class="lg:col-span-6 relative">
+                <div class="bg-white rounded-3xl p-4 border border-stone-200 shadow-xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=1600&auto=format&fit=crop" 
+                         alt="Emily Royce Spatial Visualisation" 
+                         class="w-full h-[360px] sm:h-[420px] object-cover rounded-2xl">
+                    <div class="pt-3 px-2 flex items-center justify-between text-xs text-[#525560] font-mono">
+                        <span>3D Visualisation & Spatial Concept</span>
+                        <span class="text-[#9E825A] font-bold">Emily Royce Studio</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </section>
 
-<!-- ================= INTERACTIVE 2D VS 3D FLOOR PLAN COMPARE SLIDER ================= -->
-<section id="floor-plan-visualizer" class="py-12 bg-blueprint relative overflow-hidden">
+<!-- ================= 2. THE 3 CORE QUESTIONS (IMMEDIATE CLARITY) ================= -->
+<section class="py-16 bg-white border-b border-stone-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div class="p-6 rounded-2xl bg-stone-50 border border-stone-200 space-y-2">
+                <div class="text-xs font-heading font-bold uppercase tracking-wider text-[#9E825A]">What does Emily do?</div>
+                <h3 class="text-base font-heading font-bold text-[#141518]">2D Floor Plans • 3D Visualisations</h3>
+                <p class="text-xs text-[#525560] leading-relaxed">Spatial planning, CAD drawings, lease plans and photorealistic 3D room concepts.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-stone-50 border border-stone-200 space-y-2">
+                <div class="text-xs font-heading font-bold uppercase tracking-wider text-[#9E825A]">Who is it for?</div>
+                <h3 class="text-base font-heading font-bold text-[#141518]">Homeowners • Property Pros • Businesses</h3>
+                <p class="text-xs text-[#525560] leading-relaxed">Tailored floor plans and visualisations for residential extensions, lease requirements, and interior reconfigurations.</p>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-stone-50 border border-stone-200 space-y-2">
+                <div class="text-xs font-heading font-bold uppercase tracking-wider text-[#9E825A]">Why Emily?</div>
+                <h3 class="text-base font-heading font-bold text-[#141518]">Thoughtful Design. Precise Drawings.</h3>
+                <p class="text-xs text-[#525560] leading-relaxed">Combining architectural thinking with clear communication and affordable starting rates.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ================= 3. FEATURED SKILL: FROM PLAN TO SPACE (2D → 3D INTERACTIVE) ================= -->
+<section id="from-plan-to-space" class="py-24 bg-[#FBF9F5] border-b border-stone-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div class="text-center max-w-3xl mx-auto space-y-4 mb-12">
-            <div class="inline-block px-3 py-1 bg-[#C5A880]/15 border border-[#C5A880]/30 rounded-full text-xs font-heading font-semibold uppercase tracking-widest text-[#C5A880]">
-                Interactive Visualizer
+        <div class="text-center max-w-3xl mx-auto space-y-3 mb-12">
+            <div class="inline-block px-3.5 py-1 bg-[#C5A880]/15 border border-[#C5A880]/40 rounded-full text-xs font-heading font-bold uppercase tracking-widest text-[#9E825A]">
+                Skill Showcase
             </div>
-            <h2 class="text-3xl sm:text-5xl font-heading font-bold text-white">
-                2D CAD Blueprint vs. <span class="gold-gradient-text">3D Hotel/Estate Render</span>
+            <h2 class="text-3xl sm:text-5xl font-heading font-bold text-[#141518]">
+                FROM PLAN <span class="gold-gradient-text">TO SPACE</span>
             </h2>
-            <p class="text-gray-400 text-sm sm:text-base">
-                Drag the divider below to compare a raw 2D CAD laser floor plan with our 3D spatial rendering.
+            <p class="text-[#525560] text-sm sm:text-base">
+                See how a technical 2D floor plan becomes a 3D spatial concept.
             </p>
         </div>
 
-        <!-- Interactive Split Slider Component (Alpine.js) -->
+        <!-- Interactive Split Slider Widget -->
         <div x-data="{ 
+                mode: 'compare', 
                 sliderPos: 50,
                 isDragging: false,
                 updatePos(e) {
@@ -353,70 +120,411 @@
                     this.sliderPos = Math.max(0, Math.min(100, (x / rect.width) * 100));
                 }
              }" 
-             class="max-w-5xl mx-auto glass-card rounded-2xl p-4 sm:p-6 border border-white/10 shadow-2xl">
+             class="max-w-5xl mx-auto bg-white rounded-3xl p-4 sm:p-6 border border-stone-200 shadow-xl space-y-4">
             
-            <div ref="container" 
-                 @mousedown="isDragging = true; updatePos($event)"
-                 @mouseup="isDragging = false"
-                 @mouseleave="isDragging = false"
-                 @mousemove="if (isDragging) updatePos($event)"
-                 @touchstart="isDragging = true; updatePos($event)"
-                 @touchend="isDragging = false"
-                 @touchmove="if (isDragging) updatePos($event)"
-                 class="ba-slider-container relative w-full h-[400px] sm:h-[550px] rounded-xl cursor-ew-resize overflow-hidden">
+            <!-- Controls -->
+            <div class="flex items-center justify-between border-b border-stone-200 pb-4 px-2">
+                <span class="text-xs font-heading font-bold uppercase tracking-wider text-[#141518]">
+                    Interactive CAD ↔ 3D Visualizer
+                </span>
                 
-                <!-- BEFORE: 2D Blueprint Floor Plan Image -->
-                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1600&auto=format&fit=crop" 
-                     alt="2D Blueprint Floor Plan" 
-                     class="w-full h-full object-cover">
-                <div class="absolute top-4 left-4 bg-black/80 backdrop-blur-md px-4 py-2 rounded-lg border border-white/20 text-xs font-heading font-bold uppercase tracking-wider text-white">
-                    <i class="fa-solid fa-[#C5A880] fa-ruler-combined mr-2 text-[#C5A880]"></i> 2D Laser CAD Blueprint
-                </div>
-
-                <!-- AFTER: 3D Rendered Floor Plan Image -->
-                <div class="ba-slider-after" :style="`width: ${100 - sliderPos}%`" style="right: 0; left: auto;">
-                    <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=1600&auto=format&fit=crop" 
-                         alt="3D Rendered Floor Plan" 
-                         class="absolute right-0 top-0 h-full max-w-none object-cover"
-                         :style="`width: ${$refs.container ? $refs.container.clientWidth : 900}px`">
-                    <div class="absolute top-4 right-4 bg-black/80 backdrop-blur-md px-4 py-2 rounded-lg border border-[#C5A880]/40 text-xs font-heading font-bold uppercase tracking-wider text-[#C5A880]">
-                        <i class="fa-solid fa-cube mr-2"></i> 3D Photorealistic Render
-                    </div>
-                </div>
-
-                <!-- Divider Line & Handle -->
-                <div class="absolute top-0 bottom-0 w-1 bg-[#C5A880] shadow-lg pointer-events-none" 
-                     :style="`left: ${sliderPos}%`">
-                    <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-[#C5A880] text-black flex items-center justify-center shadow-xl border-2 border-white text-xs">
-                        <i class="fa-solid fa-arrows-left-right"></i>
-                    </div>
+                <div class="flex items-center space-x-1.5 bg-stone-100 p-1 rounded-xl">
+                    <button @click="mode = '2d'" 
+                            :class="mode === '2d' ? 'bg-[#141518] text-white shadow-sm' : 'text-[#525560] hover:text-[#141518]'"
+                            class="px-3.5 py-1.5 rounded-lg font-heading text-xs font-bold transition-all">
+                        📐 2D CAD Plan
+                    </button>
+                    <button @click="mode = '3d'" 
+                            :class="mode === '3d' ? 'bg-[#141518] text-white shadow-sm' : 'text-[#525560] hover:text-[#141518]'"
+                            class="px-3.5 py-1.5 rounded-lg font-heading text-xs font-bold transition-all">
+                        🧊 3D Visualisation
+                    </button>
+                    <button @click="mode = 'compare'" 
+                            :class="mode === 'compare' ? 'bg-[#C5A880] text-black font-bold shadow-sm' : 'text-[#525560] hover:text-[#141518]'"
+                            class="px-3.5 py-1.5 rounded-lg font-heading text-xs font-bold transition-all">
+                        ↔ Split Slider
+                    </button>
                 </div>
             </div>
 
-            <!-- Controls bar -->
-            <div class="mt-4 flex items-center justify-between text-xs text-gray-400 font-mono px-2">
-                <span>← Drag left for 3D render</span>
-                <span>Drag right for 2D CAD →</span>
+            <!-- View Canvas -->
+            <div class="relative w-full h-[400px] sm:h-[500px] rounded-2xl overflow-hidden border border-stone-200 bg-stone-100">
+                
+                <!-- 2D ONLY -->
+                <template x-if="mode === '2d'">
+                    <div class="relative w-full h-full">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1600&auto=format&fit=crop" 
+                             alt="Technical 2D CAD Floor Plan" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-4 py-2 rounded-lg border border-stone-300 text-xs font-heading font-bold text-[#141518] shadow-md">
+                            📐 Technical 2D CAD Floor Plan
+                        </div>
+                    </div>
+                </template>
+
+                <!-- 3D ONLY -->
+                <template x-if="mode === '3d'">
+                    <div class="relative w-full h-full">
+                        <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=1600&auto=format&fit=crop" 
+                             alt="3D Spatial Visualisation" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 bg-[#141518]/90 backdrop-blur-md px-4 py-2 rounded-lg border border-[#C5A880]/40 text-xs font-heading font-bold text-[#C5A880] shadow-md">
+                            🧊 3D Spatial Visualisation
+                        </div>
+                    </div>
+                </template>
+
+                <!-- SPLIT SLIDER -->
+                <template x-if="mode === 'compare'">
+                    <div ref="container" 
+                         @mousedown="isDragging = true; updatePos($event)"
+                         @mouseup="isDragging = false"
+                         @mouseleave="isDragging = false"
+                         @mousemove="if (isDragging) updatePos($event)"
+                         @touchstart="isDragging = true; updatePos($event)"
+                         @touchend="isDragging = false"
+                         @touchmove="if (isDragging) updatePos($event)"
+                         class="ba-slider-container relative w-full h-full cursor-ew-resize">
+                        
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1600&auto=format&fit=crop" 
+                             alt="2D Blueprint Floor Plan" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-lg border border-stone-300 text-xs font-heading font-bold text-[#141518] shadow-sm">
+                            📐 Technical 2D CAD Plan
+                        </div>
+
+                        <div class="ba-slider-after" :style="`width: ${100 - sliderPos}%`" style="right: 0; left: auto;">
+                            <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=1600&auto=format&fit=crop" 
+                                 alt="3D Rendered Floor Plan" 
+                                 class="absolute right-0 top-0 h-full max-w-none object-cover"
+                                 :style="`width: ${$refs.container ? $refs.container.clientWidth : 800}px`">
+                            <div class="absolute top-4 right-4 bg-[#141518]/90 backdrop-blur-md px-3.5 py-1.5 rounded-lg border border-[#C5A880]/40 text-xs font-heading font-bold text-[#C5A880] shadow-sm">
+                                🧊 3D Spatial Concept
+                            </div>
+                        </div>
+
+                        <div class="absolute top-0 bottom-0 w-1 bg-[#C5A880] shadow-lg pointer-events-none" 
+                             :style="`left: ${sliderPos}%`">
+                            <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-[#141518] text-[#C5A880] flex items-center justify-center shadow-2xl border-2 border-[#C5A880] text-xs">
+                                <i class="fa-solid fa-arrows-left-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+            </div>
+
+            <div class="flex items-center justify-between text-xs text-[#525560] font-mono px-2 pt-1">
+                <span>← Drag left to reveal 3D Spatial Concept</span>
+                <span>Drag right to inspect 2D CAD Blueprint →</span>
             </div>
         </div>
 
     </div>
 </section>
 
-<!-- ================= CONTACT CTA SECTION ================= -->
-<section class="py-12 bg-[#0D0D0E] relative">
+<!-- ================= 4. 4 SIMPLE SERVICES & PRICING ================= -->
+<section id="services" class="py-24 bg-white border-b border-stone-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto space-y-3 mb-16">
+            <div class="inline-block px-3.5 py-1 bg-[#C5A880]/15 border border-[#C5A880]/40 rounded-full text-xs font-heading font-bold uppercase tracking-widest text-[#9E825A]">
+                Services & Pricing
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-heading font-bold text-[#141518]">
+                Clear Services. <span class="gold-gradient-text">Transparent Pricing.</span>
+            </h2>
+            <p class="text-[#525560] text-sm sm:text-base">
+                Professional drawings and visualisations tailored around your requirements.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            
+            <!-- Service 1: 2D FLOOR PLANS -->
+            <div class="bg-stone-50 p-8 rounded-3xl border border-stone-200 shadow-sm hover:shadow-xl hover:border-[#C5A880] transition-all duration-300 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-lg">
+                        📐
+                    </div>
+                    <h3 class="text-xl font-heading font-bold text-[#141518]">2D FLOOR PLANS</h3>
+                    <div class="text-2xl font-heading font-bold text-[#9E825A]">From £85</div>
+                    <p class="text-xs text-[#525560] leading-relaxed">
+                        Accurate and professionally prepared CAD floor plans.
+                    </p>
+                </div>
+                <div class="pt-6">
+                    <a href="{{ route('contact') }}?service=2D Floor Plans" class="w-full py-3 bg-[#141518] text-white hover:bg-[#C5A880] hover:text-black font-heading font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center space-x-2">
+                        <span>Book 2D Plan</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Service 2: 3D VISUALISATIONS -->
+            <div class="bg-stone-50 p-8 rounded-3xl border border-stone-200 shadow-sm hover:shadow-xl hover:border-[#C5A880] transition-all duration-300 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-lg">
+                        🧊
+                    </div>
+                    <h3 class="text-xl font-heading font-bold text-[#141518]">3D VISUALISATIONS</h3>
+                    <div class="text-2xl font-heading font-bold text-[#9E825A]">From £175</div>
+                    <p class="text-xs text-[#525560] leading-relaxed">
+                        Bring your space to life before construction begins.
+                    </p>
+                </div>
+                <div class="pt-6">
+                    <a href="{{ route('contact') }}?service=3D Visualisations" class="w-full py-3 bg-[#141518] text-white hover:bg-[#C5A880] hover:text-black font-heading font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center space-x-2">
+                        <span>Book 3D Visualisation</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Service 3: LEASE PLANS -->
+            <div class="bg-stone-50 p-8 rounded-3xl border border-stone-200 shadow-sm hover:shadow-xl hover:border-[#C5A880] transition-all duration-300 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-lg">
+                        📄
+                    </div>
+                    <h3 class="text-xl font-heading font-bold text-[#141518]">LEASE PLANS</h3>
+                    <div class="text-2xl font-heading font-bold text-[#9E825A]">From £145</div>
+                    <p class="text-xs text-[#525560] leading-relaxed">
+                        Clear and accurate plans prepared for property requirements.
+                    </p>
+                </div>
+                <div class="pt-6">
+                    <a href="{{ route('contact') }}?service=Lease Plans" class="w-full py-3 bg-[#141518] text-white hover:bg-[#C5A880] hover:text-black font-heading font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center space-x-2">
+                        <span>Book Lease Plan</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Service 4: DESIGN & PLANNING DRAWINGS -->
+            <div class="bg-stone-50 p-8 rounded-3xl border border-stone-200 shadow-sm hover:shadow-xl hover:border-[#C5A880] transition-all duration-300 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-lg">
+                        🏛️
+                    </div>
+                    <h3 class="text-xl font-heading font-bold text-[#141518]">DESIGN & PLANNING</h3>
+                    <div class="text-2xl font-heading font-bold text-[#9E825A]">From £350</div>
+                    <p class="text-xs text-[#525560] leading-relaxed">
+                        Tailored drawings developed around your project.
+                    </p>
+                </div>
+                <div class="pt-6">
+                    <a href="{{ route('contact') }}?service=Planning Drawings" class="w-full py-3 bg-[#141518] text-white hover:bg-[#C5A880] hover:text-black font-heading font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center space-x-2">
+                        <span>Book Planning Drawings</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Credibility Footer Banner -->
+        <div class="mt-12 p-6 bg-stone-100 rounded-2xl border border-stone-200 flex flex-col sm:flex-row items-center justify-between text-xs text-[#525560] gap-4">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-shield-halved text-base text-[#9E825A]"></i>
+                <span class="font-semibold text-[#141518]">Prepared in accordance with HM Land Registry requirements.</span>
+            </div>
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-clock text-base text-[#9E825A]"></i>
+                <span>Typical turnaround: 24–48 hours (depending on project scope and availability).</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= 5. HONEST PORTFOLIO: ARCHITECTURAL CONCEPTS & DESIGN STUDIES ================= -->
+<section id="projects" class="py-24 bg-[#FBF9F5] border-b border-stone-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div class="space-y-3">
+                <div class="inline-block px-3.5 py-1 bg-[#C5A880]/15 border border-[#C5A880]/40 rounded-full text-xs font-heading font-bold uppercase tracking-widest text-[#9E825A]">
+                    Portfolio Showcase
+                </div>
+                <h2 class="text-3xl sm:text-5xl font-heading font-bold text-[#141518]">
+                    ARCHITECTURAL CONCEPTS & <span class="gold-gradient-text">DESIGN STUDIES</span>
+                </h2>
+            </div>
+            <a href="{{ route('projects.index') }}" class="mt-4 md:mt-0 text-sm font-heading font-bold uppercase tracking-wider text-[#141518] hover:text-[#9E825A] transition-colors flex items-center space-x-2">
+                <span>View Full Catalog</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+        </div>
+
+        <!-- Filtered Projects Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @foreach($allProjects->take(6) as $project)
+                <div class="bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-xl hover:border-[#C5A880] group flex flex-col justify-between transition-all duration-500 hover:-translate-y-2">
+                    <div>
+                        <!-- Project Hero Image -->
+                        <div class="relative h-64 overflow-hidden bg-stone-100">
+                            <img src="{{ $project->hero_image }}" 
+                                 alt="{{ $project->title }}" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                            
+                            <!-- HONEST CLASSIFICATION BADGE -->
+                            <span class="absolute top-4 left-4 px-3 py-1 bg-white/95 backdrop-blur-md rounded-full text-[10px] font-heading font-bold uppercase tracking-wider text-[#141518] border border-stone-200 shadow-sm">
+                                {{ $project->subtitle }}
+                            </span>
+                        </div>
+
+                        <!-- Details -->
+                        <div class="p-6 space-y-3">
+                            <h3 class="text-xl font-heading font-bold text-[#141518] group-hover:text-[#9E825A] transition-colors">
+                                {{ $project->title }}
+                            </h3>
+                            
+                            <p class="text-xs text-[#525560] leading-relaxed">
+                                {{ $project->overview }}
+                            </p>
+
+                            <!-- Explicit Scope of Work -->
+                            <div class="pt-2">
+                                <span class="text-[10px] font-heading font-bold uppercase text-[#9E825A] block tracking-wider">Scope of Work</span>
+                                <span class="text-xs text-[#141518] font-medium block">{{ $project->sustainability_specs }}</span>
+                            </div>
+
+                            <div class="pt-3 border-t border-stone-100 flex items-center justify-between text-xs text-[#626570] font-mono">
+                                <span><i class="fa-solid fa-location-dot text-[#9E825A] mr-1"></i> {{ $project->location }}</span>
+                                <span>{{ $project->area_sqm }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-6 pb-6 pt-2">
+                        <a href="{{ route('projects.show', $project->slug) }}" class="w-full py-3 bg-stone-100 hover:bg-[#141518] text-[#141518] hover:text-white font-heading font-bold text-xs uppercase tracking-wider rounded-xl transition-all duration-300 flex items-center justify-center space-x-2">
+                            <span>View Project Details</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= 6. HOW IT WORKS (SIMPLE CLIENT JOURNEY) ================= -->
+<section class="py-24 bg-white border-b border-stone-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto space-y-3 mb-16">
+            <div class="inline-block px-3.5 py-1 bg-[#C5A880]/15 border border-[#C5A880]/40 rounded-full text-xs font-heading font-bold uppercase tracking-widest text-[#9E825A]">
+                Simple Client Process
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-heading font-bold text-[#141518]">
+                HOW IT <span class="gold-gradient-text">WORKS</span>
+            </h2>
+            <p class="text-[#525560] text-sm sm:text-base">
+                Getting started with your drawings or visualisation is simple and clear.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+            
+            <div class="p-6 bg-stone-50 rounded-2xl border border-stone-200 space-y-3 relative">
+                <div class="w-10 h-10 rounded-xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-sm">01</div>
+                <h4 class="font-heading font-bold text-sm text-[#141518]">TELL ME ABOUT YOUR PROJECT</h4>
+                <p class="text-xs text-[#525560] leading-relaxed">Tell me what you need and what you want to achieve.</p>
+            </div>
+
+            <div class="p-6 bg-stone-50 rounded-2xl border border-stone-200 space-y-3 relative">
+                <div class="w-10 h-10 rounded-xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-sm">02</div>
+                <h4 class="font-heading font-bold text-sm text-[#141518]">SEND YOUR INFORMATION</h4>
+                <p class="text-xs text-[#525560] leading-relaxed">Plans, measurements, photographs or sketches.</p>
+            </div>
+
+            <div class="p-6 bg-stone-50 rounded-2xl border border-stone-200 space-y-3 relative">
+                <div class="w-10 h-10 rounded-xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-sm">03</div>
+                <h4 class="font-heading font-bold text-sm text-[#141518]">DESIGN</h4>
+                <p class="text-xs text-[#525560] leading-relaxed">Your drawings or visualisation are developed around your requirements.</p>
+            </div>
+
+            <div class="p-6 bg-stone-50 rounded-2xl border border-stone-200 space-y-3 relative">
+                <div class="w-10 h-10 rounded-xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-sm">04</div>
+                <h4 class="font-heading font-bold text-sm text-[#141518]">REVIEW</h4>
+                <p class="text-xs text-[#525560] leading-relaxed">You review the work and provide feedback.</p>
+            </div>
+
+            <div class="p-6 bg-stone-50 rounded-2xl border border-stone-200 space-y-3 relative">
+                <div class="w-10 h-10 rounded-xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-sm">05</div>
+                <h4 class="font-heading font-bold text-sm text-[#141518]">FINAL DELIVERY</h4>
+                <p class="text-xs text-[#525560] leading-relaxed">You receive your completed drawings and files.</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= 7. MEET EMILY (PERSONAL & WARM STORY) ================= -->
+<section id="about-emily" class="py-24 bg-[#FBF9F5] border-b border-stone-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-5 relative">
+                <div class="rounded-3xl overflow-hidden border border-stone-200 shadow-xl bg-white">
+                    <img src="{{ \App\Models\SiteSetting::get('about_designer_image', 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop') }}" 
+                         alt="Emily Royce - Architecture & Design Student" 
+                         class="w-full h-[480px] object-cover object-center">
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 space-y-6">
+                <div class="inline-block px-3.5 py-1 bg-[#C5A880]/15 border border-[#C5A880]/40 rounded-full text-xs font-heading font-bold uppercase tracking-widest text-[#9E825A]">
+                    About The Designer
+                </div>
+
+                <h2 class="text-3xl sm:text-5xl font-heading font-bold text-[#141518]">
+                    MEET EMILY
+                </h2>
+
+                <div class="space-y-4 text-[#3A3C44] text-base leading-relaxed">
+                    <p>
+                        I'm Emily, an Architecture & Design student with a passion for creating thoughtful, functional and visually refined spaces.
+                    </p>
+                    <p>
+                        My work combines architectural thinking, precise CAD drawing and 3D visualisation to explore how spaces can work better for the people who use them.
+                    </p>
+                    <p>
+                        I'm currently developing my skills through academic projects and independent design work, while building a portfolio focused on spatial planning, visualisation and contemporary design.
+                    </p>
+                </div>
+
+                <div class="pt-4">
+                    <a href="{{ route('about') }}" class="inline-flex items-center space-x-2 text-sm font-heading font-bold uppercase tracking-wider text-[#141518] hover:text-[#9E825A] transition-colors">
+                        <span>Read More About Emily</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ================= 8. CONTACT CTA SECTION ================= -->
+<section class="py-24 bg-white">
     <div class="max-w-4xl mx-auto px-4 text-center space-y-6">
-        <h2 class="text-3xl sm:text-5xl font-heading font-bold text-white">
-            Have a Grand Project in Mind? <br>
-            <span class="gold-gradient-text">Let's Design Together</span>
+        <h2 class="text-3xl sm:text-5xl font-heading font-bold text-[#141518]">
+            Have a project in mind? <br>
+            <span class="gold-gradient-text">TELL ME ABOUT YOUR PROJECT</span>
         </h2>
-        <p class="text-gray-300 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            Whether you require high-end hotel concept masterplans, corporate office layouts, or luxury estate rest-designs, {{ \App\Models\SiteSetting::get('about_designer_name', 'Emily Royce') }} Architecture delivers uncompromised quality.
+        <p class="text-[#3A3C44] text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+            Whether you need a 2D CAD floor plan, a Land Registry lease plan, or a 3D visualisation, I'd love to help you bring your space to life.
         </p>
         <div class="pt-4">
-            <a href="{{ route('contact') }}" class="inline-flex items-center space-x-3 px-10 py-5 bg-[#C5A880] text-black font-heading font-bold text-sm uppercase tracking-wider hover:bg-white transition-all shadow-2xl shadow-[#C5A880]/25 rounded-xl">
-                <span>Start Architectural Brief</span>
-                <i class="fa-solid fa-paper-plane text-xs"></i>
+            <a href="{{ route('contact') }}" class="inline-flex items-center space-x-3 px-10 py-5 bg-[#141518] text-white font-heading font-bold text-sm uppercase tracking-wider hover:bg-[#C5A880] hover:text-black transition-all shadow-xl rounded-xl">
+                <span>Tell Me About Your Project</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
             </a>
         </div>
     </div>

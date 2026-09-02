@@ -1,169 +1,189 @@
 @extends('layouts.app')
 
-@section('title', 'Contact Studio | Emily Royce Architecture')
+@section('title', 'Contact Emily | Architectural Design & Visualisation')
 
 @section('content')
 
 <!-- Header Banner -->
-<section class="py-16 bg-[#111215] border-b border-white/5 bg-blueprint">
+<section class="py-16 bg-white border-b border-stone-200 bg-blueprint">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl space-y-4">
-            <div class="inline-block px-3 py-1 bg-[#C5A880]/15 border border-[#C5A880]/30 rounded-full text-xs font-heading font-semibold uppercase tracking-widest text-[#C5A880]">
-                Direct Studio Inquiry
+            <div class="inline-block px-3.5 py-1 bg-[#C5A880]/15 border border-[#C5A880]/40 rounded-full text-xs font-heading font-bold uppercase tracking-widest text-[#9E825A]">
+                Direct Contact
             </div>
-            <h1 class="text-4xl sm:text-6xl font-heading font-bold text-white tracking-tight">
-                Start Your <span class="gold-gradient-text">Architectural Brief</span>
+            <h1 class="text-4xl sm:text-6xl font-heading font-bold text-[#141518] tracking-tight">
+                TELL ME ABOUT <span class="gold-gradient-text">YOUR PROJECT</span>
             </h1>
-            <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
-                Send us your project details, required floor plan service, or architectural inquiry. We respond within 24 hours.
+            <p class="text-[#4A4D57] text-sm sm:text-base leading-relaxed">
+                Tell me what you need and what you want to achieve. I respond within 24 hours.
             </p>
         </div>
     </div>
 </section>
 
-<!-- Contact Form & Studio Info -->
-<section class="py-20 bg-[#0D0D0E]">
+<!-- Contact Form & Details -->
+<section class="py-20 bg-[#FBF9F5]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
             
             <!-- Left: Interactive Form -->
             <div class="lg:col-span-7">
-                <div class="glass-card p-8 sm:p-10 rounded-3xl border border-white/10 shadow-2xl">
-                    <h2 class="text-2xl font-heading font-bold text-white mb-6">
-                        Commission Brief / Inquiry Form
-                    </h2>
+                <div class="bg-white p-8 sm:p-10 rounded-3xl border border-stone-200 shadow-sm space-y-6">
+                    <div>
+                        <h2 class="text-2xl font-heading font-bold text-[#141518]">
+                            Project Enquiry Form
+                        </h2>
+                        <p class="text-xs text-[#525560] mt-1">Fill out the simple options below to get started.</p>
+                    </div>
 
                     <form action="{{ route('contact.store') }}" method="POST" class="space-y-6"
                           x-data="{ 
                             submitting: false,
-                            service: '{{ request()->query('service') }}' || '2D Architectural CAD Floor Plans'
+                            selectedServices: []
                           }">
                         @csrf
+
+                        <!-- Checkboxes: WHAT CAN I HELP YOU WITH? -->
+                        <div class="space-y-3 p-5 bg-stone-50 rounded-2xl border border-stone-200">
+                            <label class="text-xs font-heading font-bold uppercase tracking-wider text-[#141518] block">
+                                WHAT CAN I HELP YOU WITH?
+                            </label>
+                            
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-1 text-xs text-[#141518] font-semibold">
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" name="services[]" value="2D Floor Plan" class="w-4 h-4 rounded text-[#141518] focus:ring-[#C5A880]">
+                                    <span>2D Floor Plan</span>
+                                </label>
+
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" name="services[]" value="3D Visualisation" class="w-4 h-4 rounded text-[#141518] focus:ring-[#C5A880]">
+                                    <span>3D Visualisation</span>
+                                </label>
+
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" name="services[]" value="Home Redesign" class="w-4 h-4 rounded text-[#141518] focus:ring-[#C5A880]">
+                                    <span>Home Redesign</span>
+                                </label>
+
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" name="services[]" value="Planning Drawings" class="w-4 h-4 rounded text-[#141518] focus:ring-[#C5A880]">
+                                    <span>Planning Drawings</span>
+                                </label>
+
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" name="services[]" value="Lease Plan" class="w-4 h-4 rounded text-[#141518] focus:ring-[#C5A880]">
+                                    <span>Lease Plan</span>
+                                </label>
+
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" name="services[]" value="Property Project" class="w-4 h-4 rounded text-[#141518] focus:ring-[#C5A880]">
+                                    <span>Property Project</span>
+                                </label>
+
+                                <label class="flex items-center space-x-2 cursor-pointer col-span-2 sm:col-span-1">
+                                    <input type="checkbox" name="services[]" value="Other" class="w-4 h-4 rounded text-[#141518] focus:ring-[#C5A880]">
+                                    <span>Other</span>
+                                </label>
+                            </div>
+                        </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <!-- Name -->
                             <div class="space-y-2">
-                                <label class="text-xs font-heading uppercase tracking-wider text-gray-300">Your Full Name *</label>
-                                <input type="text" name="name" required placeholder="e.g. Alexander Vance"
-                                       class="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white text-sm focus:border-[#C5A880] focus:outline-none transition-colors">
+                                <label class="text-xs font-heading font-bold uppercase tracking-wider text-[#141518]">Your Name *</label>
+                                <input type="text" name="name" required placeholder="e.g. Sarah Jenkins"
+                                       class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-[#141518] text-sm font-semibold focus:border-[#C5A880] focus:outline-none transition-colors">
                             </div>
 
                             <!-- Email -->
                             <div class="space-y-2">
-                                <label class="text-xs font-heading uppercase tracking-wider text-gray-300">Email Address *</label>
+                                <label class="text-xs font-heading font-bold uppercase tracking-wider text-[#141518]">Email Address *</label>
                                 <input type="email" name="email" required placeholder="name@domain.com"
-                                       class="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white text-sm focus:border-[#C5A880] focus:outline-none transition-colors">
+                                       class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-[#141518] text-sm font-semibold focus:border-[#C5A880] focus:outline-none transition-colors">
                             </div>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <!-- Phone -->
                             <div class="space-y-2">
-                                <label class="text-xs font-heading uppercase tracking-wider text-gray-300">Telephone / WhatsApp</label>
+                                <label class="text-xs font-heading font-bold uppercase tracking-wider text-[#141518]">Telephone / WhatsApp</label>
                                 <input type="text" name="phone" placeholder="+44 7700 900000"
-                                       class="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white text-sm focus:border-[#C5A880] focus:outline-none transition-colors">
+                                       class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-[#141518] text-sm font-semibold focus:border-[#C5A880] focus:outline-none transition-colors">
                             </div>
 
-                            <!-- Service Type -->
+                            <!-- Property Location -->
                             <div class="space-y-2">
-                                <label class="text-xs font-heading uppercase tracking-wider text-gray-300">Service Category</label>
-                                <select name="service_type" x-model="service"
-                                        class="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white text-sm focus:border-[#C5A880] focus:outline-none transition-colors">
-                                    <option value="2D Architectural CAD Floor Plans">2D Architectural CAD Floor Plans</option>
-                                    <option value="3D Photorealistic Rendered Floor Plans">3D Photorealistic Rendered Floor Plans</option>
-                                    <option value="HM Land Registry Compliant Lease Plans">HM Land Registry Compliant Lease Plans</option>
-                                    <option value="Planning Permission & Building Control Drawings">Planning Permission Drawings</option>
-                                    <option value="Full Architectural Design Consultation">Full Architectural Design Consultation</option>
-                                </select>
+                                <label class="text-xs font-heading font-bold uppercase tracking-wider text-[#141518]">Project Location</label>
+                                <input type="text" name="location" placeholder="e.g. London, Cambridge, UK"
+                                       class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-[#141518] text-sm font-semibold focus:border-[#C5A880] focus:outline-none transition-colors">
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <!-- Budget Range -->
-                            <div class="space-y-2">
-                                <label class="text-xs font-heading uppercase tracking-wider text-gray-300">Target Budget</label>
-                                <select name="budget_range"
-                                        class="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white text-sm focus:border-[#C5A880] focus:outline-none transition-colors">
-                                    <option value="Under £250">Under £250 (Standard Floor Plan)</option>
-                                    <option value="£250 - £1,000">£250 - £1,000 (Multi-tier 3D / Lease Package)</option>
-                                    <option value="£1,000 - £5,000">£1,000 - £5,000 (Planning Application Package)</option>
-                                    <option value="£5,000+">£5,000+ (Bespoke Architectural Project)</option>
-                                </select>
-                            </div>
-
-                            <!-- Property Size -->
-                            <div class="space-y-2">
-                                <label class="text-xs font-heading uppercase tracking-wider text-gray-300">Approx. Floor Area (SQM)</label>
-                                <input type="text" name="property_size_sqm" value="{{ request()->query('sqm') }}" placeholder="e.g. 120 m²"
-                                       class="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white text-sm focus:border-[#C5A880] focus:outline-none transition-colors">
-                            </div>
-                        </div>
-
-                        <!-- Message Brief -->
+                        <!-- Message -->
                         <div class="space-y-2">
-                            <label class="text-xs font-heading uppercase tracking-wider text-gray-300">Project Brief & Site Location *</label>
-                            <textarea name="message" rows="5" required placeholder="Describe your property layout, intended deadlines, or specific architectural requirements..."
-                                      class="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white text-sm focus:border-[#C5A880] focus:outline-none transition-colors"></textarea>
+                            <label class="text-xs font-heading font-bold uppercase tracking-wider text-[#141518]">Tell me about your project & requirements *</label>
+                            <textarea name="message" rows="5" required placeholder="Describe what you need, your property layout, or any sketches/photos you have..."
+                                      class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-[#141518] text-sm font-semibold focus:border-[#C5A880] focus:outline-none transition-colors"></textarea>
                         </div>
 
                         <!-- Submit Button -->
                         <button type="submit" @click="submitting = true"
-                                class="w-full py-4 bg-[#C5A880] text-black font-heading font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-white transition-all shadow-xl shadow-[#C5A880]/20 flex items-center justify-center space-x-3">
-                            <span x-text="submitting ? 'Transmitting Brief via SMTP...' : 'Send Architectural Brief'"></span>
+                                class="w-full py-4 bg-[#141518] text-white font-heading font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-[#C5A880] hover:text-black transition-all shadow-md flex items-center justify-center space-x-3">
+                            <span x-text="submitting ? 'Sending Message...' : 'Send Message'"></span>
                             <i class="fa-solid fa-paper-plane text-xs"></i>
                         </button>
                     </form>
                 </div>
             </div>
 
-            <!-- Right: Direct Studio Info -->
+            <!-- Right: Direct Contact Info -->
             <div class="lg:col-span-5 space-y-8">
-                <div class="glass-card p-8 rounded-3xl border border-white/10 space-y-6">
-                    <h3 class="text-xl font-heading font-bold text-white border-b border-white/10 pb-4">
-                        Studio Contact Info
+                <div class="bg-white p-8 rounded-3xl border border-stone-200 shadow-sm space-y-6">
+                    <h3 class="text-xl font-heading font-bold text-[#141518] border-b border-stone-200 pb-4">
+                        Direct Contact
                     </h3>
 
-                    <div class="space-y-4 text-sm text-gray-300">
+                    <div class="space-y-4 text-sm text-[#3A3C44]">
                         <div class="flex items-start space-x-4">
-                            <div class="w-10 h-10 rounded-xl bg-[#C5A880]/15 text-[#C5A880] flex items-center justify-center flex-shrink-0">
+                            <div class="w-10 h-10 rounded-xl bg-[#141518] text-[#C5A880] flex items-center justify-center flex-shrink-0">
                                 <i class="fa-solid fa-envelope text-sm"></i>
                             </div>
                             <div>
-                                <span class="text-[10px] font-heading uppercase text-gray-500 block tracking-wider">Direct Email</span>
-                                <a href="mailto:emily@emilyroyce.com" class="font-bold text-white hover:text-[#C5A880] transition-colors">emily@emilyroyce.com</a>
+                                <span class="text-[10px] font-heading font-bold uppercase text-[#626570] block tracking-wider">Email</span>
+                                <a href="mailto:emily@emilyroyce.com" class="font-bold text-[#141518] hover:text-[#9E825A] transition-colors">emily@emilyroyce.com</a>
                             </div>
                         </div>
 
                         <div class="flex items-start space-x-4">
-                            <div class="w-10 h-10 rounded-xl bg-[#C5A880]/15 text-[#C5A880] flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-paper-plane text-sm"></i>
-                            </div>
-                            <div>
-                                <span class="text-[10px] font-heading uppercase text-gray-500 block tracking-wider">SMTP Dispatch Relay</span>
-                                <span class="font-mono text-xs text-gray-400">phil.andreson@nexteck.uk</span>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start space-x-4">
-                            <div class="w-10 h-10 rounded-xl bg-[#C5A880]/15 text-[#C5A880] flex items-center justify-center flex-shrink-0">
+                            <div class="w-10 h-10 rounded-xl bg-[#141518] text-[#C5A880] flex items-center justify-center flex-shrink-0">
                                 <i class="fa-solid fa-location-dot text-sm"></i>
                             </div>
                             <div>
-                                <span class="text-[10px] font-heading uppercase text-gray-500 block tracking-wider">Studio Locations</span>
-                                <span class="font-medium text-white">London & Cambridge, United Kingdom</span>
+                                <span class="text-[10px] font-heading font-bold uppercase text-[#626570] block tracking-wider">Location</span>
+                                <span class="font-bold text-[#141518]">London & Cambridge, United Kingdom</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-[#141518] text-[#C5A880] flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-clock text-sm"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-heading font-bold uppercase text-[#626570] block tracking-wider">Turnaround</span>
+                                <span class="font-semibold text-[#141518]">Typical turnaround: 24–48 hours</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Database Status Badge -->
-                <div class="glass-card p-6 rounded-2xl border border-[#C5A880]/30 space-y-2">
-                    <div class="flex items-center space-x-2 text-[#C5A880]">
-                        <i class="fa-solid fa-database text-xs"></i>
-                        <h4 class="font-heading font-bold text-xs uppercase tracking-wider">MySQL Connected: `architecture` DB</h4>
+                <!-- Credibility Note -->
+                <div class="bg-stone-100 p-6 rounded-2xl border border-stone-200 space-y-2">
+                    <div class="flex items-center space-x-2 text-[#9E825A]">
+                        <i class="fa-solid fa-shield-halved text-xs"></i>
+                        <h4 class="font-heading font-bold text-xs uppercase tracking-wider">HM Land Registry Wording</h4>
                     </div>
-                    <p class="text-[11px] text-gray-400 leading-relaxed">
-                        Inquiries are logged securely into host <code>103.171.180.169</code> and dispatched simultaneously to studio inbox.
+                    <p class="text-[11px] text-[#525560] leading-relaxed">
+                        Lease plans are prepared in accordance with HM Land Registry requirements.
                     </p>
                 </div>
             </div>

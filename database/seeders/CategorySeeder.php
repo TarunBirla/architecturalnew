@@ -14,9 +14,10 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['name' => 'Luxury Hotels & Resorts', 'sort_order' => 1],
-            ['name' => 'Corporate Offices & Towers', 'sort_order' => 2],
-            ['name' => 'Luxury Estates & House Redesign', 'sort_order' => 3],
+            ['name' => 'Academic Concepts', 'sort_order' => 1],
+            ['name' => '2D Floor Plans', 'sort_order' => 2],
+            ['name' => '3D Visualisations', 'sort_order' => 3],
+            ['name' => 'Client Projects', 'sort_order' => 4],
         ];
 
         foreach ($categories as $cat) {

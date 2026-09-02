@@ -19,15 +19,16 @@ use App\Http\Controllers\CategoryController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 
-// Projects
-Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
-Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projects.show');
-
-// Floor Planning Services
+// Services (Floor Plans, Visualisations, Lease Plans, Planning)
+Route::get('/services', [FloorPlanController::class, 'index'])->name('services.index');
 Route::get('/floor-plans', [FloorPlanController::class, 'index'])->name('floor-plans.index');
 Route::get('/floor-plans/{slug}', [FloorPlanController::class, 'show'])->name('floor-plans.show');
 
-// Public Photo Gallery
+// Projects (Concepts & Design Studies)
+Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projects.show');
+
+// Photo Gallery Archive
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
 
 // Contact & Inquiries
