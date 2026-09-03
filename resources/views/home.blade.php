@@ -294,7 +294,7 @@
 </section>
 
 <!-- ================= 4. 4 SIMPLE SERVICES & PRICING ================= -->
-<!-- <section id="services" class="py-16  bg-white border-b border-stone-200">
+<section id="services" class="py-16  bg-white border-b border-stone-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center max-w-3xl mx-auto space-y-3 mb-10 sm:mb-16">
@@ -311,6 +311,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             
+            <!-- Service 1: 2D FLOOR PLANS -->
             <div class="bg-stone-50 p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-sm hover:shadow-xl hover:border-[#C5A880] transition-all duration-300 flex flex-col justify-between">
                 <div class="space-y-3 sm:space-y-4">
                     <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-base sm:text-lg">
@@ -330,6 +331,7 @@
                 </div>
             </div>
 
+            <!-- Service 2: 3D VISUALISATIONS -->
             <div class="bg-stone-50 p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-sm hover:shadow-xl hover:border-[#C5A880] transition-all duration-300 flex flex-col justify-between">
                 <div class="space-y-3 sm:space-y-4">
                     <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-base sm:text-lg">
@@ -349,6 +351,7 @@
                 </div>
             </div>
 
+            <!-- Service 3: LEASE PLANS -->
             <div class="bg-stone-50 p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-sm hover:shadow-xl hover:border-[#C5A880] transition-all duration-300 flex flex-col justify-between">
                 <div class="space-y-3 sm:space-y-4">
                     <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-base sm:text-lg">
@@ -368,6 +371,7 @@
                 </div>
             </div>
 
+            <!-- Service 4: DESIGN & PLANNING DRAWINGS -->
             <div class="bg-stone-50 p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-sm hover:shadow-xl hover:border-[#C5A880] transition-all duration-300 flex flex-col justify-between">
                 <div class="space-y-3 sm:space-y-4">
                     <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-base sm:text-lg">
@@ -389,6 +393,7 @@
 
         </div>
 
+        <!-- Credibility Footer Banner -->
         <div class="mt-8 sm:mt-12 p-5 sm:p-6 bg-stone-100 rounded-2xl border border-stone-200 flex flex-col sm:flex-row items-start sm:items-center justify-between text-xs text-[#525560] gap-3 sm:gap-4">
             <div class="flex items-center space-x-3">
                 <i class="fa-solid fa-shield-halved text-base text-[#9E825A] flex-shrink-0"></i>
@@ -401,10 +406,10 @@
         </div>
 
     </div>
-</section> -->
+</section>
 
 <!-- ================= 5. PORTFOLIO SHOWCASE ================= -->
-<!-- <section id="projects" class="py-16  bg-[#FBF9F5] border-b border-stone-200">
+<section id="projects" class="py-16  bg-[#FBF9F5] border-b border-stone-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-3">
@@ -470,7 +475,7 @@
         </div>
 
     </div>
-</section> -->
+</section>
 
 <!-- ================= 6. PRO-LEVEL MASONRY PHOTO GALLERY SHOWCASE ================= -->
 <section id="photo-gallery" class="py-16  bg-white border-b border-stone-200" x-data="{ activeLightbox: null }">
@@ -563,7 +568,7 @@
 </section>
 
 <!-- ================= 7. HOW IT WORKS (ADMIN CMS MANAGED 5 STEPS) ================= -->
-<!-- <section class="py-16  bg-[#FBF9F5] border-b border-stone-200">
+<section class="py-16  bg-[#FBF9F5] border-b border-stone-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center max-w-3xl mx-auto space-y-3 mb-10 sm:mb-16">
@@ -613,7 +618,7 @@
         </div>
 
     </div>
-</section> -->
+</section>
 
 <!-- ================= 8. MEET EMILY (PERSONAL & WARM STORY) ================= -->
 <section id="about-emily" class="py-16  bg-white border-b border-stone-200">
@@ -654,7 +659,7 @@
 </section>
 
 <!-- ================= 9. CONTACT CTA SECTION ================= -->
-<!-- <section class="py-16  bg-[#FBF9F5]">
+<section class="py-16  bg-[#FBF9F5]">
     <div class="max-w-4xl mx-auto px-4 text-center space-y-4 sm:space-y-6">
         <h2 class="text-2xl sm:text-4xl lg:text-5xl font-heading font-bold text-[#141518]">
             Have a project in mind? <br>
@@ -670,6 +675,6 @@
             </a>
         </div>
     </div>
-</section> -->
+</section>
 
 @endsection
