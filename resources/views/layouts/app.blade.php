@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Emily Royce | Architectural Design & Visualisation')</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- CENTRAL FRONTEND THEME SYSTEM -->
+    <!-- CENTRAL FRONTEND STYLING SYSTEM -->
     @include('partials.theme-frontend')
 
     <!-- Alpine.js CDN -->
@@ -24,6 +23,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-[#C5A880] selection:text-black">
+
+    <!-- Toast Notifications Component -->
+    @include('partials.toast-notifications')
 
     <!-- HEADER / NAVIGATION (LIGHT GLASSMORPHIC) -->
     <header class="sticky top-0 z-40 glass-nav transition-all duration-300">
@@ -128,52 +130,66 @@
                         </div>
                         <div>
                             <h3 class="font-heading font-bold text-white text-base">EMILY ROYCE</h3>
-                            <span class="text-[10px] text-[#C5A880] font-heading font-bold uppercase tracking-widest block">Architectural Design & Visualisation</span>
+                            <p class="text-xs text-[#C5A880] font-heading font-bold uppercase">Architecture & Design Student</p>
                         </div>
                     </div>
-                    <p class="text-xs text-gray-400 leading-relaxed max-w-md">
-                        Architecture & Design Student focusing on creative spatial design, precise 2D CAD floor plans, and 3D visualisations.
+                    <p class="text-xs text-gray-400 leading-relaxed font-sans max-w-sm">
+                        Creative spatial design, precise floor plans and 3D visualisations. Honesty, clarity and architectural quality.
                     </p>
                 </div>
 
                 <!-- Col 2: Navigation Links -->
                 <div class="md:col-span-3 space-y-3">
-                    <h4 class="font-heading font-bold text-xs uppercase tracking-widest text-[#C5A880]">Navigation</h4>
-                    <ul class="space-y-2 text-xs text-gray-300 font-heading font-semibold">
+                    <h4 class="font-heading font-bold text-xs uppercase tracking-widest text-[#C5A880]">Studio Pages</h4>
+                    <ul class="space-y-2 text-xs font-sans text-gray-300">
                         <li><a href="{{ route('home') }}" class="hover:text-[#C5A880] transition-colors">Home</a></li>
                         <li><a href="{{ route('services.index') }}" class="hover:text-[#C5A880] transition-colors">Services & Pricing</a></li>
                         <li><a href="{{ route('projects.index') }}" class="hover:text-[#C5A880] transition-colors">Architectural Concepts</a></li>
-                        <li><a href="{{ route('about') }}" class="hover:text-[#C5A880] transition-colors">Meet Emily</a></li>
-                        <li><a href="{{ route('contact') }}" class="hover:text-[#C5A880] transition-colors">Contact & Brief</a></li>
+                        <li><a href="{{ route('gallery.index') }}" class="hover:text-[#C5A880] transition-colors">Photo Gallery</a></li>
+                        <li><a href="{{ route('about') }}" class="hover:text-[#C5A880] transition-colors">About Emily</a></li>
+                        <li><a href="{{ route('contact') }}" class="hover:text-[#C5A880] transition-colors">Contact Studio</a></li>
                     </ul>
                 </div>
 
-                <!-- Col 3: Direct Studio Contact -->
+                <!-- Col 3: Direct Contact Info -->
                 <div class="md:col-span-4 space-y-3">
-                    <h4 class="font-heading font-bold text-xs uppercase tracking-widest text-[#C5A880]">Studio Contact</h4>
-                    <div class="space-y-2 text-xs text-gray-300 font-mono">
-                        <div><i class="fa-solid fa-envelope text-[#C5A880] mr-2"></i> emily@emilyroyce.com</div>
-                        <div><i class="fa-solid fa-location-dot text-[#C5A880] mr-2"></i> London & Cambridge Studio, UK</div>
-                        <div class="pt-2 text-[11px] text-gray-400 font-sans">
-                            Typical turnaround: 24–48 hours (depending on project scope and availability).
-                        </div>
+                    <h4 class="font-heading font-bold text-xs uppercase tracking-widest text-[#C5A880]">Direct Contact</h4>
+                    <div class="space-y-2 text-xs text-gray-300 font-sans">
+                        <p class="flex items-center space-x-2">
+                            <i class="fa-solid fa-envelope text-[#C5A880]"></i>
+                            <span>{{ \App\Models\SiteSetting::get('contact_email', 'emily@emilyroyce.com') }}</span>
+                        </p>
+                        <p class="flex items-center space-x-2">
+                            <i class="fa-solid fa-location-dot text-[#C5A880]"></i>
+                            <span>{{ \App\Models\SiteSetting::get('contact_location', 'London & Cambridge Studio, UK') }}</span>
+                        </p>
+                        <p class="flex items-center space-x-2 text-[11px] text-gray-400">
+                            <i class="fa-solid fa-clock text-[#C5A880]"></i>
+                            <span>Responses within 24 hours</span>
+                        </p>
+                    </div>
+
+                    <div class="pt-4">
+                        <a href="{{ route('contact') }}" class="inline-block px-5 py-2.5 bg-[#C5A880] text-black font-heading font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-white transition-colors">
+                            Tell Me About Your Project
+                        </a>
                     </div>
                 </div>
 
             </div>
 
-            <!-- Copyright & Secret Admin Portal Link -->
-            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 font-mono gap-4">
+            <!-- Footer Bottom bar -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-400 font-sans gap-4">
                 <div>
-                    &copy; {{ date('Y') }} Emily Royce. Architectural Design & Visualisation. All rights reserved.
+                    &copy; {{ date('Y') }} Emily Royce Architecture & Design. All rights reserved.
                 </div>
                 <div class="flex items-center space-x-4">
-                    <a href="{{ route('admin.login') }}" class="text-gray-600 hover:text-[#C5A880] transition-colors text-[11px]">
-                        <i class="fa-solid fa-lock text-[10px] mr-1"></i> Studio Admin Portal
+                    <a href="{{ route('admin.login') }}" class="hover:text-[#C5A880] transition-colors text-[10px] text-gray-400 font-mono flex items-center space-x-1">
+                        <i class="fa-solid fa-lock text-[9px]"></i>
+                        <span>Studio CMS Portal</span>
                     </a>
                 </div>
             </div>
-
         </div>
     </footer>
 
