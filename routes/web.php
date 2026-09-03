@@ -37,12 +37,13 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 
 /*
 |--------------------------------------------------------------------------
-| Admin Authentication Routes (Hidden Secret Login)
+| Admin Authentication Routes (Simplified /login URL)
 |--------------------------------------------------------------------------
 */
-Route::get('/studio-cms-portal/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
-Route::post('/studio-cms-portal/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
-Route::post('/studio-cms-portal/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login')->name('admin.login');
+Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
+Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+Route::redirect('/studio-cms-portal/login', '/login');
 
 /*
 |--------------------------------------------------------------------------
