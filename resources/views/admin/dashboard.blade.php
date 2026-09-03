@@ -1,90 +1,94 @@
 @extends('admin.layout')
 
-@section('title', 'Admin Dashboard | Emily Royce Architecture CMS')
+@section('title', 'Admin Dashboard | Studio CMS')
 
 @section('content')
 
 <div class="space-y-8">
-
-    <!-- Header -->
-    <div class="flex items-center justify-between">
+    <!-- Top Welcome Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-8 rounded-3xl border border-stone-200 shadow-sm">
         <div>
-            <h1 class="text-3xl font-heading font-bold text-white">Studio Management Dashboard</h1>
-            <p class="text-xs text-gray-400 mt-1">Full control over site content, banners, images, projects, and floor plan services.</p>
+            <span class="text-xs font-heading font-bold uppercase tracking-widest text-[#9E825A]">CMS Management Portal</span>
+            <h1 class="text-3xl font-heading font-bold text-[#141518]">Welcome Back, Emily</h1>
+            <p class="text-xs text-[#525560] mt-1">Manage your architectural concepts, photo gallery, categories, services, and client inquiries.</p>
         </div>
-        <div class="flex space-x-3">
-            <a href="{{ route('admin.settings') }}" class="px-4 py-2.5 bg-[#C5A880] text-black font-heading font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-white transition-colors">
-                <i class="fa-solid fa-sliders mr-2"></i> Edit Site Banners & Content
+
+        <div class="flex items-center space-x-3">
+            <a href="{{ route('admin.projects.create') }}" class="px-5 py-3 bg-[#141518] text-white hover:bg-[#C5A880] hover:text-black font-heading font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center space-x-2">
+                <i class="fa-solid fa-plus text-xs"></i>
+                <span>Add New Project</span>
+            </a>
+            <a href="{{ route('admin.gallery') }}" class="px-5 py-3 bg-stone-100 border border-stone-200 hover:border-[#C5A880] text-[#141518] font-heading font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center space-x-2">
+                <i class="fa-solid fa-upload text-xs"></i>
+                <span>Upload Photos</span>
             </a>
         </div>
     </div>
 
-    <!-- Quick Stats Cards -->
+    <!-- Quick Stats Metric Cards -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-brand-card p-6 rounded-2xl border border-brand-border space-y-2">
-            <span class="text-gray-500 uppercase text-[10px] font-heading font-bold tracking-widest">Active Projects</span>
-            <div class="font-heading text-3xl font-bold text-white">{{ $projectCount }}</div>
-            <a href="{{ route('admin.projects') }}" class="text-[11px] text-[#C5A880] hover:underline block pt-1">Manage Catalog &rarr;</a>
+        <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm space-y-2">
+            <div class="flex items-center justify-between text-[#9E825A]">
+                <span class="text-xs font-heading font-bold uppercase tracking-wider text-[#626570]">Projects</span>
+                <i class="fa-solid fa-folder-open text-xl"></i>
+            </div>
+            <div class="text-3xl font-heading font-bold text-[#141518]">{{ $stats['total_projects'] ?? 0 }}</div>
+            <span class="text-[11px] text-[#525560]">Active Case Studies</span>
         </div>
 
-        <div class="bg-brand-card p-6 rounded-2xl border border-brand-border space-y-2">
-            <span class="text-gray-500 uppercase text-[10px] font-heading font-bold tracking-widest">Floor Plan Services</span>
-            <div class="font-heading text-3xl font-bold text-white">{{ $serviceCount }}</div>
-            <a href="{{ route('admin.services') }}" class="text-[11px] text-[#C5A880] hover:underline block pt-1">Manage Pricing & Services &rarr;</a>
+        <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm space-y-2">
+            <div class="flex items-center justify-between text-[#9E825A]">
+                <span class="text-xs font-heading font-bold uppercase tracking-wider text-[#626570]">Photo Archive</span>
+                <i class="fa-solid fa-images text-xl"></i>
+            </div>
+            <div class="text-3xl font-heading font-bold text-[#141518]">{{ $stats['total_photos'] ?? 0 }}</div>
+            <span class="text-[11px] text-[#525560]">Gallery Uploads</span>
         </div>
 
-        <div class="bg-brand-card p-6 rounded-2xl border border-brand-border space-y-2">
-            <span class="text-gray-500 uppercase text-[10px] font-heading font-bold tracking-widest">Total Inquiries</span>
-            <div class="font-heading text-3xl font-bold text-white">{{ $inquiryCount }}</div>
-            <a href="{{ route('admin.inquiries') }}" class="text-[11px] text-[#C5A880] hover:underline block pt-1">View All Inquiries &rarr;</a>
+        <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm space-y-2">
+            <div class="flex items-center justify-between text-[#9E825A]">
+                <span class="text-xs font-heading font-bold uppercase tracking-wider text-[#626570]">Categories</span>
+                <i class="fa-solid fa-tags text-xl"></i>
+            </div>
+            <div class="text-3xl font-heading font-bold text-[#141518]">{{ $stats['total_categories'] ?? 0 }}</div>
+            <span class="text-[11px] text-[#525560]">Dynamic Work Types</span>
         </div>
 
-        <div class="bg-brand-card p-6 rounded-2xl border border-brand-border space-y-2">
-            <span class="text-gray-500 uppercase text-[10px] font-heading font-bold tracking-widest">Pending Inquiries</span>
-            <div class="font-heading text-3xl font-bold text-[#C5A880]">{{ $pendingInquiries }}</div>
-            <a href="{{ route('admin.inquiries') }}" class="text-[11px] text-gray-400 hover:underline block pt-1">Requires Response &rarr;</a>
+        <div class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm space-y-2">
+            <div class="flex items-center justify-between text-[#9E825A]">
+                <span class="text-xs font-heading font-bold uppercase tracking-wider text-[#626570]">Client Inquiries</span>
+                <i class="fa-solid fa-envelope-open-text text-xl"></i>
+            </div>
+            <div class="text-3xl font-heading font-bold text-[#141518]">{{ $stats['total_inquiries'] ?? 0 }}</div>
+            <span class="text-[11px] text-[#525560]">Received Messages</span>
         </div>
     </div>
 
-    <!-- Recent Inquiries Table -->
-    <div class="bg-brand-card rounded-2xl border border-brand-border p-6 space-y-4">
-        <div class="flex items-center justify-between">
-            <h3 class="font-heading font-bold text-lg text-white">Recent Client Inquiries</h3>
-            <a href="{{ route('admin.inquiries') }}" class="text-xs text-[#C5A880] hover:underline">View All &rarr;</a>
-        </div>
+    <!-- Quick Navigation Modules -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <a href="{{ route('admin.projects') }}" class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm hover:shadow-xl hover:border-[#C5A880] transition-all space-y-3 block group">
+            <div class="w-10 h-10 rounded-2xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-base group-hover:bg-[#C5A880] group-hover:text-black transition-colors">
+                <i class="fa-solid fa-folder-open"></i>
+            </div>
+            <h3 class="text-lg font-heading font-bold text-[#141518]">Manage Projects & Concepts</h3>
+            <p class="text-xs text-[#525560]">Create, edit, or remove academic projects, CAD surveys, and client visualisations.</p>
+        </a>
 
-        <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs text-gray-300">
-                <thead class="bg-black/50 text-[#C5A880] uppercase font-heading font-bold text-[10px] tracking-widest border-b border-brand-border">
-                    <tr>
-                        <th class="p-3">Client</th>
-                        <th class="p-3">Email</th>
-                        <th class="p-3">Service</th>
-                        <th class="p-3">Status</th>
-                        <th class="p-3">Date</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-brand-border">
-                    @forelse($recentInquiries as $inq)
-                        <tr class="hover:bg-white/5 transition-colors">
-                            <td class="p-3 font-bold text-white">{{ $inq->name }}</td>
-                            <td class="p-3 font-mono text-gray-400">{{ $inq->email }}</td>
-                            <td class="p-3">{{ $inq->service_type ?? 'General Inquiry' }}</td>
-                            <td class="p-3">
-                                <span class="px-2 py-1 bg-[#C5A880]/15 text-[#C5A880] rounded text-[10px] font-bold uppercase">
-                                    {{ $inq->status }}
-                                </span>
-                            </td>
-                            <td class="p-3 font-mono text-gray-500">{{ $inq->created_at->format('M d, Y') }}</td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="5" class="p-6 text-center text-gray-500">No client inquiries yet.</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
+        <a href="{{ route('admin.gallery') }}" class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm hover:shadow-xl hover:border-[#C5A880] transition-all space-y-3 block group">
+            <div class="w-10 h-10 rounded-2xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-base group-hover:bg-[#C5A880] group-hover:text-black transition-colors">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+            </div>
+            <h3 class="text-lg font-heading font-bold text-[#141518]">Upload Photo Gallery</h3>
+            <p class="text-xs text-[#525560]">Upload new CAD floor plan blueprints and 3D room renders with aspect ratios.</p>
+        </a>
+
+        <a href="{{ route('admin.categories') }}" class="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm hover:shadow-xl hover:border-[#C5A880] transition-all space-y-3 block group">
+            <div class="w-10 h-10 rounded-2xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-base group-hover:bg-[#C5A880] group-hover:text-black transition-colors">
+                <i class="fa-solid fa-tags"></i>
+            </div>
+            <h3 class="text-lg font-heading font-bold text-[#141518]">Manage Work Categories</h3>
+            <p class="text-xs text-[#525560]">Add, rename, or reorder dynamic category filter tabs across the portfolio.</p>
+        </a>
     </div>
 
 </div>
