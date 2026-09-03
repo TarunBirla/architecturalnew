@@ -141,14 +141,14 @@
                 <!-- Col 2: Navigation Links -->
                 <div class="md:col-span-3 space-y-3">
                     <h4 class="font-heading font-bold text-xs uppercase tracking-widest text-[#C5A880]">Studio Pages</h4>
-                    <ul class="space-y-2 text-xs font-sans text-gray-300">
+                    <!-- <ul class="space-y-2 text-xs font-sans text-gray-300">
                         <li><a href="{{ route('home') }}" class="hover:text-[#C5A880] transition-colors">Home</a></li>
                         <li><a href="{{ route('services.index') }}" class="hover:text-[#C5A880] transition-colors">Services & Pricing</a></li>
                         <li><a href="{{ route('projects.index') }}" class="hover:text-[#C5A880] transition-colors">Architectural Concepts</a></li>
                         <li><a href="{{ route('gallery.index') }}" class="hover:text-[#C5A880] transition-colors">Photo Gallery</a></li>
                         <li><a href="{{ route('about') }}" class="hover:text-[#C5A880] transition-colors">About Emily</a></li>
                         <li><a href="{{ route('contact') }}" class="hover:text-[#C5A880] transition-colors">Contact Studio</a></li>
-                    </ul>
+                    </ul> -->
                 </div>
 
                 <!-- Col 3: Direct Contact Info -->
