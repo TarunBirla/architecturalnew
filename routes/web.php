@@ -37,12 +37,14 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 
 /*
 |--------------------------------------------------------------------------
-| Admin Authentication Routes (Simplified /login URL)
+| Admin Authentication Routes (/login & /logout)
 |--------------------------------------------------------------------------
 */
-Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login')->name('admin.login');
+Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
-Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+
+Route::match(['get', 'post'], '/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+Route::match(['get', 'post'], '/studio-cms-portal/logout', [AdminAuthController::class, 'logout']);
 Route::redirect('/studio-cms-portal/login', '/login');
 
 /*
