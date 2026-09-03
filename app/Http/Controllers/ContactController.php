@@ -17,6 +17,13 @@ class ContactController extends Controller
 
     public function store(Request $request)
     {
+        // Convert services[] array into string if provided
+        if ($request->has('services') && is_array($request->input('services'))) {
+            $request->merge([
+                'service_type' => implode(', ', $request->input('services'))
+            ]);
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
@@ -24,8 +31,13 @@ class ContactController extends Controller
             'service_type' => 'nullable|string|max:255',
             'budget_range' => 'nullable|string|max:255',
             'property_size_sqm' => 'nullable|string|max:100',
-            'message' => 'required|string|min:10',
+            'location' => 'nullable|string|max:255',
+            'message' => 'required|string|min:5',
         ]);
+
+        if ($request->filled('location')) {
+            $validated['property_size_sqm'] = $request->input('location');
+        }
 
         $validated['ip_address'] = $request->ip();
 
@@ -38,7 +50,7 @@ class ContactController extends Controller
                 ->send(new InquirySubmittedMail($inquiry));
         } catch (\Exception $e) {
             Log::error('SMTP Mail Dispatch Error: ' . $e->getMessage());
-            // We still proceed gracefully as inquiry is saved to DB
+            // Proceed gracefully as inquiry is saved to DB
         }
 
         if ($request->wantsJson()) {

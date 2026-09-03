@@ -10,41 +10,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Alpine.js -->
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- CENTRAL ADMIN PANEL THEME SYSTEM -->
+    @include('admin.partials.theme-admin')
+
+    <!-- Alpine.js CDN -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <!-- Tailwind CSS & FontAwesome -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            dark: '#141518',
-                            sidebar: '#FFFFFF',
-                            card: '#FFFFFF',
-                            accent: '#C5A880',
-                            accentHover: '#B3956B',
-                            border: '#E5E2D9'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        heading: ['"Space Grotesk"', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        body { background-color: #FBF9F5; color: #1A1B20; font-family: 'Plus Jakarta Sans', sans-serif; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #FBF9F5; }
-        ::-webkit-scrollbar-thumb { background: #C5A880; border-radius: 3px; }
-    </style>
 </head>
 <body class="flex min-h-screen">
 

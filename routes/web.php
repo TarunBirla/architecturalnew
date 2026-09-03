@@ -65,6 +65,7 @@ Route::prefix('studio-cms-portal')->middleware(['auth'])->group(function () {
     // Photo Gallery CMS
     Route::get('/gallery', [AdminController::class, 'gallery'])->name('admin.gallery');
     Route::post('/gallery', [AdminController::class, 'storeGallery'])->name('admin.gallery.store');
+    Route::post('/gallery/{id}/update', [AdminController::class, 'updateGallery'])->name('admin.gallery.update');
     Route::post('/gallery/{id}/delete', [AdminController::class, 'destroyGallery'])->name('admin.gallery.destroy');
 
     // Projects CRUD
@@ -83,8 +84,9 @@ Route::prefix('studio-cms-portal')->middleware(['auth'])->group(function () {
     Route::post('/services/{id}/edit', [AdminController::class, 'updateService'])->name('admin.services.update');
     Route::post('/services/{id}/delete', [AdminController::class, 'destroyService'])->name('admin.services.destroy');
 
-    // Inquiries
+    // Inquiries Management
     Route::get('/inquiries', [AdminController::class, 'inquiries'])->name('admin.inquiries');
     Route::post('/inquiries/{id}/status', [AdminController::class, 'updateInquiryStatus'])->name('admin.inquiries.status');
+    Route::post('/inquiries/{id}/update', [AdminController::class, 'updateInquiry'])->name('admin.inquiries.update');
     Route::post('/inquiries/{id}/delete', [AdminController::class, 'destroyInquiry'])->name('admin.inquiries.destroy');
 });

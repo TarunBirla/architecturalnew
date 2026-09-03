@@ -5,7 +5,7 @@
 @section('content')
 
 <!-- Project Hero Banner (Light & Fresh) -->
-<section class="relative py-16 sm:py-24 bg-white border-b border-stone-200 bg-blueprint">
+<section class="relative py-16  bg-white border-b border-stone-200 bg-blueprint">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             

@@ -1,32 +1,33 @@
 @extends('admin.layout')
 
-@section('title', 'Add New Project | Admin Panel')
+@section('title', 'Add New Project | Studio CMS')
 
 @section('content')
 
 <div class="max-w-4xl space-y-8">
 
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between bg-white p-8 rounded-3xl border border-stone-200 shadow-sm">
         <div>
-            <h1 class="text-3xl font-heading font-bold text-white">Add New Architectural Project</h1>
-            <p class="text-xs text-gray-400 mt-1">Upload project hero photo, blueprint CAD drawing, overview, and specs.</p>
+            <span class="text-xs font-heading font-bold uppercase tracking-widest text-[#9E825A]">CMS Portfolio Manager</span>
+            <h1 class="text-3xl font-heading font-bold text-[#141518]">Add New Project</h1>
+            <p class="text-xs text-[#525560] mt-1">Upload project cover photo, blueprint CAD drawing, overview, and specs.</p>
         </div>
-        <a href="{{ route('admin.projects') }}" class="text-xs text-gray-400 hover:text-white">&larr; Back to Projects</a>
+        <a href="{{ route('admin.projects') }}" class="text-xs text-[#525560] hover:text-[#9E825A] font-bold">&larr; Back to Projects</a>
     </div>
 
-    <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data" class="bg-brand-card p-8 rounded-2xl border border-brand-border space-y-6">
+    <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data" class="bg-white p-8 rounded-3xl border border-stone-200 shadow-sm space-y-6">
         @csrf
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div class="space-y-2">
-                <label class="text-xs font-heading uppercase text-gray-300">Project Title *</label>
-                <input type="text" name="title" required placeholder="e.g. The Azure Horizon Resort & Spa"
-                       class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-sm font-bold focus:border-[#C5A880] focus:outline-none">
+                <label class="text-xs font-heading font-bold uppercase tracking-wider text-[#141518]">Project Title *</label>
+                <input type="text" name="title" required placeholder="e.g. Mayfair Townhouse Loft Conversion"
+                       class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-[#141518] text-sm font-semibold focus:border-[#C5A880] focus:outline-none">
             </div>
 
             <div class="space-y-2">
-                <label class="text-xs font-heading uppercase text-gray-300">Category *</label>
-                <select name="category" required class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs focus:border-[#C5A880] focus:outline-none">
+                <label class="text-xs font-heading font-bold uppercase tracking-wider text-[#141518]">Category *</label>
+                <select name="category" required class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-[#141518] text-sm font-semibold focus:border-[#C5A880] focus:outline-none">
                     @foreach($categories as $cat)
                         <option value="{{ $cat->name }}">{{ $cat->name }}</option>
                     @endforeach
@@ -34,92 +35,76 @@
             </div>
         </div>
 
-        <div class="space-y-2">
-            <label class="text-xs font-heading uppercase text-gray-300">Subtitle / Tagline</label>
-            <input type="text" name="subtitle" placeholder="e.g. 5-Star Oceanfront Pavilion & Masterplan"
-                   class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs focus:border-[#C5A880] focus:outline-none">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="space-y-2">
+                <label class="text-xs font-heading font-bold uppercase tracking-wider text-[#141518]">Project Badge / Classification *</label>
+                <select name="subtitle" required class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-[#141518] text-sm font-semibold focus:border-[#C5A880] focus:outline-none">
+                    <option value="ACADEMIC PROJECT">ACADEMIC PROJECT (University Coursework)</option>
+                    <option value="PERSONAL CONCEPT PROJECT">PERSONAL CONCEPT PROJECT (Independent Design)</option>
+                    <option value="CLIENT PROJECT">CLIENT PROJECT (Real Client Floor Plan / Visual)</option>
+                </select>
+            </div>
+
+            <div class="space-y-2">
+                <label class="text-xs font-heading font-bold uppercase tracking-wider text-[#141518]">Location</label>
+                <input type="text" name="location" placeholder="e.g. London, Cambridge, UK"
+                       class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-[#141518] text-sm font-semibold focus:border-[#C5A880] focus:outline-none">
+            </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div class="space-y-2">
-                <label class="text-xs font-heading uppercase text-gray-300">Client</label>
-                <input type="text" name="client" placeholder="e.g. Azure Hospitality Syndicate"
-                       class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs focus:border-[#C5A880] focus:outline-none">
-            </div>
-
-            <div class="space-y-2">
-                <label class="text-xs font-heading uppercase text-gray-300">Location</label>
-                <input type="text" name="location" placeholder="e.g. Maldives Atoll / Mayfair London"
-                       class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs focus:border-[#C5A880] focus:outline-none">
-            </div>
-
-            <div class="space-y-2">
-                <label class="text-xs font-heading uppercase text-gray-300">Year & Area</label>
+                <label class="text-xs font-heading font-bold uppercase tracking-wider text-[#141518]">Year & Area</label>
                 <div class="flex space-x-2">
                     <input type="number" name="year" value="{{ date('Y') }}" placeholder="2026"
-                           class="w-1/2 px-3 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs font-mono">
-                    <input type="text" name="area_sqm" placeholder="42,000 m²"
-                           class="w-1/2 px-3 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs font-mono">
+                           class="w-1/2 px-3 py-3 bg-stone-50 border border-stone-200 rounded-xl text-[#141518] text-xs font-mono font-semibold">
+                    <input type="text" name="area_sqm" placeholder="145 m²"
+                           class="w-1/2 px-3 py-3 bg-stone-50 border border-stone-200 rounded-xl text-[#141518] text-xs font-mono font-semibold">
                 </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="text-xs font-heading font-bold uppercase tracking-wider text-[#141518]">Emily's Scope of Work *</label>
+                <input type="text" name="sustainability_specs" placeholder="e.g. 2D CAD Survey • Floor Plan • Space Planning"
+                       class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-[#141518] text-sm font-semibold focus:border-[#C5A880] focus:outline-none">
             </div>
         </div>
 
         <div class="space-y-2">
-            <label class="text-xs font-heading uppercase text-gray-300">Project Overview Narrative *</label>
-            <textarea name="overview" rows="4" required placeholder="Detailed architectural description..."
-                      class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs focus:border-[#C5A880] focus:outline-none"></textarea>
+            <label class="text-xs font-heading font-bold uppercase tracking-wider text-[#141518]">Project Overview Narrative *</label>
+            <textarea name="overview" rows="4" required placeholder="Concise description of the project brief and layout strategy..."
+                      class="w-full px-4 py-3 bg-stone-50 border border-stone-200 rounded-xl text-[#141518] text-sm font-semibold focus:border-[#C5A880] focus:outline-none"></textarea>
         </div>
 
-        <div class="space-y-2">
-            <label class="text-xs font-heading uppercase text-gray-300">Spatial & Concept Strategy</label>
-            <textarea name="concept_design" rows="3" placeholder="Structural principles, ventilation, zoning..."
-                      class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs focus:border-[#C5A880] focus:outline-none"></textarea>
-        </div>
-
-        <div class="space-y-2">
-            <label class="text-xs font-heading uppercase text-gray-300">Sustainability & Specs</label>
-            <input type="text" name="sustainability_specs" placeholder="e.g. LEED Platinum Target • Solar Canopy Matrix"
-                   class="w-full px-4 py-2.5 bg-black/60 border border-brand-border rounded-xl text-white text-xs focus:border-[#C5A880] focus:outline-none">
-        </div>
-
-        <!-- File Upload Section for Hero Image & Blueprint CAD Image -->
-        <div class="space-y-6 pt-4 border-t border-brand-border">
-            <!-- Hero Image Upload -->
-            <div class="p-4 bg-black/40 rounded-xl border border-white/5 space-y-3">
-                <label class="text-xs font-heading uppercase text-[#C5A880] font-bold block">1. Project Cover / Hero Image Photo</label>
-                <div class="space-y-2">
-                    <label class="text-[11px] text-gray-300 block">Choose Photo File from Device:</label>
-                    <input type="file" name="hero_image_file" accept="image/*" class="text-xs text-gray-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-[#C5A880] file:text-black hover:file:bg-white cursor-pointer">
-                </div>
+        <!-- File Upload Section -->
+        <div class="space-y-6 pt-4 border-t border-stone-200">
+            <div class="p-4 bg-stone-50 rounded-2xl border border-stone-200 space-y-3">
+                <label class="text-xs font-heading font-bold uppercase text-[#9E825A] block">1. Project Cover Photo</label>
+                <input type="file" name="hero_image_file" accept="image/*" class="text-xs text-[#525560] file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-[#141518] file:text-white cursor-pointer">
                 <div>
-                    <label class="text-[11px] text-gray-400 block">Or Paste Image URL:</label>
-                    <input type="text" name="hero_image" placeholder="https://images.unsplash.com/..." class="w-full px-3 py-1.5 bg-black/60 border border-brand-border rounded-lg text-white text-xs font-mono">
+                    <label class="text-[11px] text-[#626570] block font-semibold">Or Image URL:</label>
+                    <input type="text" name="hero_image" placeholder="https://images.unsplash.com/..." class="w-full px-3 py-2 bg-white border border-stone-200 rounded-lg text-[#141518] text-xs font-mono">
                 </div>
             </div>
 
-            <!-- Blueprint CAD Image Upload -->
-            <div class="p-4 bg-black/40 rounded-xl border border-white/5 space-y-3">
-                <label class="text-xs font-heading uppercase text-[#C5A880] font-bold block">2. Blueprint CAD Drawing Photo</label>
-                <div class="space-y-2">
-                    <label class="text-[11px] text-gray-300 block">Choose Blueprint Photo File from Device:</label>
-                    <input type="file" name="blueprint_image_file" accept="image/*" class="text-xs text-gray-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-[#C5A880] file:text-black hover:file:bg-white cursor-pointer">
-                </div>
+            <div class="p-4 bg-stone-50 rounded-2xl border border-stone-200 space-y-3">
+                <label class="text-xs font-heading font-bold uppercase text-[#9E825A] block">2. 2D CAD Blueprint Drawing Image</label>
+                <input type="file" name="blueprint_image_file" accept="image/*" class="text-xs text-[#525560] file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-[#141518] file:text-white cursor-pointer">
                 <div>
-                    <label class="text-[11px] text-gray-400 block">Or Paste Blueprint Image URL:</label>
-                    <input type="text" name="blueprint_image" placeholder="https://images.unsplash.com/..." class="w-full px-3 py-1.5 bg-black/60 border border-brand-border rounded-lg text-white text-xs font-mono">
+                    <label class="text-[11px] text-[#626570] block font-semibold">Or Image URL:</label>
+                    <input type="text" name="blueprint_image" placeholder="https://images.unsplash.com/..." class="w-full px-3 py-2 bg-white border border-stone-200 rounded-lg text-[#141518] text-xs font-mono">
                 </div>
             </div>
         </div>
 
-        <div class="flex items-center space-x-3 pt-2">
-            <input type="checkbox" name="featured" value="1" id="featuredCheck" class="w-4 h-4 accent-[#C5A880]">
-            <label for="featuredCheck" class="text-xs font-heading uppercase text-gray-300">Feature this project on homepage grid</label>
-        </div>
+        <div class="pt-4 border-t border-stone-200 flex items-center justify-between">
+            <label class="flex items-center space-x-2 cursor-pointer text-xs font-bold text-[#141518]">
+                <input type="checkbox" name="featured" value="1" checked class="w-4 h-4 rounded text-[#141518]">
+                <span>Feature on Homepage Portfolio Showcase</span>
+            </label>
 
-        <div class="pt-4">
-            <button type="submit" class="w-full py-4 bg-[#C5A880] text-black font-heading font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-white transition-all shadow-xl shadow-[#C5A880]/20 flex items-center justify-center space-x-2">
-                <i class="fa-solid fa-cloud-arrow-up"></i>
-                <span>Upload Photos & Save Project</span>
+            <button type="submit" class="px-8 py-4 bg-[#141518] text-white hover:bg-[#C5A880] hover:text-black font-heading font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md">
+                Save & Publish Project
             </button>
         </div>
 

@@ -9,6 +9,7 @@ use App\Models\SiteSetting;
 use App\Models\Gallery;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -50,11 +51,20 @@ class AdminController extends Controller
         $pendingInquiries = Inquiry::where('status', 'pending')->count();
         $recentInquiries = Inquiry::orderBy('created_at', 'desc')->take(5)->get();
 
-        return view('admin.dashboard', compact('projectCount', 'serviceCount', 'inquiryCount', 'galleryCount', 'categoryCount', 'pendingInquiries', 'recentInquiries'));
+        $stats = [
+            'total_projects' => $projectCount,
+            'total_services' => $serviceCount,
+            'total_inquiries' => $inquiryCount,
+            'total_photos' => $galleryCount,
+            'total_categories' => $categoryCount,
+            'pending_inquiries' => $pendingInquiries,
+        ];
+
+        return view('admin.dashboard', compact('projectCount', 'serviceCount', 'inquiryCount', 'galleryCount', 'categoryCount', 'pendingInquiries', 'recentInquiries', 'stats'));
     }
 
     /**
-     * Gallery Management (CMS Upload)
+     * Gallery Management (CMS Upload & Edit)
      */
     public function gallery()
     {
@@ -73,9 +83,9 @@ class AdminController extends Controller
             'image_url' => 'nullable|string',
         ]);
 
-        $imagePath = $this->processUpload($request, 'image_file', 'image_url');
+        $imagePath = $this->processUpload($request, 'image', 'image_url');
         if (!$imagePath) {
-            return redirect()->back()->withErrors(['image_file' => 'Please upload an image file or provide an image URL.']);
+            return redirect()->back()->withErrors(['image' => 'Please upload an image file or provide an image URL.']);
         }
 
         $validated['image_url'] = $imagePath;
@@ -84,6 +94,26 @@ class AdminController extends Controller
         Gallery::create($validated);
 
         return redirect()->route('admin.gallery')->with('success', 'New architectural photo uploaded to gallery successfully!');
+    }
+
+    public function updateGallery(Request $request, $id)
+    {
+        $item = Gallery::findOrFail($id);
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'caption' => 'nullable|string|max:255',
+            'aspect_ratio' => 'required|string|in:tall,wide,square',
+            'image_url' => 'nullable|string',
+        ]);
+
+        $imagePath = $this->processUpload($request, 'image_file', 'image_url', $item->image_url);
+        $validated['image_url'] = $imagePath;
+
+        $item->update($validated);
+
+        return redirect()->route('admin.gallery')->with('success', 'Gallery photo updated successfully!');
     }
 
     public function destroyGallery($id)
@@ -99,36 +129,39 @@ class AdminController extends Controller
      */
     public function settings()
     {
-        $settings = SiteSetting::all()->pluck('value', 'key')->toArray();
+        $settings = SiteSetting::pluck('value', 'key')->toArray();
         return view('admin.settings', compact('settings'));
     }
 
     public function updateSettings(Request $request)
     {
-        $inputs = $request->except(['_token', 'hero_image_1_file', 'hero_image_2_file', 'hero_image_3_file', 'about_designer_image_file']);
+        $inputs = $request->except('_token');
 
-        if ($uploadedImg1 = $this->processUpload($request, 'hero_image_1_file', 'hero_image_1')) {
-            $inputs['hero_image_1'] = $uploadedImg1;
-        }
-        if ($uploadedImg2 = $this->processUpload($request, 'hero_image_2_file', 'hero_image_2')) {
-            $inputs['hero_image_2'] = $uploadedImg2;
-        }
-        if ($uploadedImg3 = $this->processUpload($request, 'hero_image_3_file', 'hero_image_3')) {
-            $inputs['hero_image_3'] = $uploadedImg3;
-        }
-        if ($uploadedProfile = $this->processUpload($request, 'about_designer_image_file', 'about_designer_image')) {
-            $inputs['about_designer_image'] = $uploadedProfile;
+        // Process file uploads for image fields
+        $imageFields = [
+            'hero_image_1', 'hero_image_2', 'hero_image_3', 'hero_image_4',
+            'from_plan_2d_image', 'from_plan_3d_image',
+            'about_designer_image'
+        ];
+
+        foreach ($imageFields as $field) {
+            $fileKey = $field . '_file';
+            if ($request->hasFile($fileKey)) {
+                $inputs[$field] = $this->processUpload($request, $fileKey);
+            }
         }
 
         foreach ($inputs as $key => $val) {
-            SiteSetting::set($key, $val ?? '');
+            if (!is_array($val) && strpos($key, '_file') === false) {
+                SiteSetting::set($key, $val);
+            }
         }
 
-        return redirect()->back()->with('success', 'All site content, banners, headings, and uploaded photos updated successfully!');
+        return redirect()->back()->with('success', 'All site content & image settings updated successfully!');
     }
 
     /**
-     * Projects Management (CRUD)
+     * Projects Management
      */
     public function projects()
     {
@@ -147,28 +180,27 @@ class AdminController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
-            'subtitle' => 'nullable|string|max:255',
+            'subtitle' => 'required|string|max:255',
             'client' => 'nullable|string|max:255',
             'location' => 'nullable|string|max:255',
             'year' => 'nullable|integer',
             'area_sqm' => 'nullable|string|max:100',
             'overview' => 'required|string',
             'concept_design' => 'nullable|string',
-            'sustainability_specs' => 'nullable|string',
+            'sustainability_specs' => 'required|string',
             'hero_image' => 'nullable|string',
             'blueprint_image' => 'nullable|string',
             'featured' => 'nullable|boolean',
         ]);
 
-        $validated['hero_image'] = $this->processUpload($request, 'hero_image_file', 'hero_image') ?? 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop';
-        $validated['blueprint_image'] = $this->processUpload($request, 'blueprint_image_file', 'blueprint_image');
-
-        $validated['slug'] = \Illuminate\Support\Str::slug($validated['title']) . '-' . rand(100, 999);
+        $validated['slug'] = Str::slug($validated['title']);
+        $validated['hero_image'] = $this->processUpload($request, 'hero_image_file', 'hero_image', 'https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=1600&auto=format&fit=crop');
+        $validated['blueprint_image'] = $this->processUpload($request, 'blueprint_image_file', 'blueprint_image', 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1600&auto=format&fit=crop');
         $validated['featured'] = $request->has('featured');
 
         Project::create($validated);
 
-        return redirect()->route('admin.projects')->with('success', 'Project created successfully!');
+        return redirect()->route('admin.projects')->with('success', 'New architectural project created successfully!');
     }
 
     public function editProject($id)
@@ -185,29 +217,21 @@ class AdminController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
-            'subtitle' => 'nullable|string|max:255',
+            'subtitle' => 'required|string|max:255',
             'client' => 'nullable|string|max:255',
             'location' => 'nullable|string|max:255',
             'year' => 'nullable|integer',
             'area_sqm' => 'nullable|string|max:100',
             'overview' => 'required|string',
             'concept_design' => 'nullable|string',
-            'sustainability_specs' => 'nullable|string',
+            'sustainability_specs' => 'required|string',
             'hero_image' => 'nullable|string',
             'blueprint_image' => 'nullable|string',
             'featured' => 'nullable|boolean',
         ]);
 
-        $uploadedHero = $this->processUpload($request, 'hero_image_file', 'hero_image', $project->hero_image);
-        if ($uploadedHero) {
-            $validated['hero_image'] = $uploadedHero;
-        }
-
-        $uploadedBlueprint = $this->processUpload($request, 'blueprint_image_file', 'blueprint_image', $project->blueprint_image);
-        if ($uploadedBlueprint) {
-            $validated['blueprint_image'] = $uploadedBlueprint;
-        }
-
+        $validated['hero_image'] = $this->processUpload($request, 'hero_image_file', 'hero_image', $project->hero_image);
+        $validated['blueprint_image'] = $this->processUpload($request, 'blueprint_image_file', 'blueprint_image', $project->blueprint_image);
         $validated['featured'] = $request->has('featured');
 
         $project->update($validated);
@@ -220,11 +244,11 @@ class AdminController extends Controller
         $project = Project::findOrFail($id);
         $project->delete();
 
-        return redirect()->route('admin.projects')->with('success', 'Project deleted successfully!');
+        return redirect()->route('admin.projects')->with('success', 'Project deleted successfully.');
     }
 
     /**
-     * Floor Plan Services Management (CRUD)
+     * Services Management
      */
     public function services()
     {
@@ -242,17 +266,16 @@ class AdminController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
+            'starting_price' => 'required|numeric',
+            'turnaround_time' => 'required|string|max:255',
             'short_description' => 'required|string',
             'full_description' => 'required|string',
-            'turnaround_time' => 'required|string|max:100',
-            'starting_price' => 'required|numeric',
-            'icon' => 'required|string',
             'featured_image' => 'nullable|string',
         ]);
 
-        $validated['featured_image'] = $this->processUpload($request, 'featured_image_file', 'featured_image') ?? 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1200&auto=format&fit=crop';
-        $validated['slug'] = \Illuminate\Support\Str::slug($validated['title']);
-        $validated['featured'] = true;
+        $validated['slug'] = Str::slug($validated['title']);
+        $validated['featured_image'] = $this->processUpload($request, 'featured_image_file', 'featured_image', 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1600&auto=format&fit=crop');
+        $validated['icon'] = 'ruler';
 
         FloorPlanService::create($validated);
 
@@ -272,18 +295,14 @@ class AdminController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
+            'starting_price' => 'required|numeric',
+            'turnaround_time' => 'required|string|max:255',
             'short_description' => 'required|string',
             'full_description' => 'required|string',
-            'turnaround_time' => 'required|string|max:100',
-            'starting_price' => 'required|numeric',
-            'icon' => 'required|string',
             'featured_image' => 'nullable|string',
         ]);
 
-        $uploadedServiceImg = $this->processUpload($request, 'featured_image_file', 'featured_image', $service->featured_image);
-        if ($uploadedServiceImg) {
-            $validated['featured_image'] = $uploadedServiceImg;
-        }
+        $validated['featured_image'] = $this->processUpload($request, 'featured_image_file', 'featured_image', $service->featured_image);
 
         $service->update($validated);
 
@@ -314,6 +333,23 @@ class AdminController extends Controller
         $inquiry->save();
 
         return redirect()->back()->with('success', 'Inquiry status updated successfully.');
+    }
+
+    public function updateInquiry(Request $request, $id)
+    {
+        $inquiry = Inquiry::findOrFail($id);
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'nullable|string|max:50',
+            'service_type' => 'nullable|string|max:255',
+            'status' => 'required|string|in:pending,contacted,completed',
+            'message' => 'required|string',
+        ]);
+
+        $inquiry->update($validated);
+
+        return redirect()->back()->with('success', 'Inquiry details updated successfully.');
     }
 
     public function destroyInquiry($id)
