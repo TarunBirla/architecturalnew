@@ -54,7 +54,7 @@
                         HOME
                     </a>
 
-                    <a href="{{ route('services.index') }}" 
+                    <!-- <a href="{{ route('services.index') }}" 
                        class="transition-colors hover:text-[#9E825A] {{ request()->routeIs('services*') || request()->routeIs('floor-plans*') ? 'text-[#141518] font-extrabold border-b-2 border-[#C5A880] pb-1' : 'text-[#626570]' }}">
                         SERVICES
                     </a>
@@ -62,9 +62,9 @@
                     <a href="{{ route('projects.index') }}" 
                        class="transition-colors hover:text-[#9E825A] {{ request()->routeIs('projects*') ? 'text-[#141518] font-extrabold border-b-2 border-[#C5A880] pb-1' : 'text-[#626570]' }}">
                         PROJECTS
-                    </a>
+                    </a> -->
 
-                    <a href="{{ route('about') }}" 
+                    <!-- <a href="{{ route('about') }}" 
                        class="transition-colors hover:text-[#9E825A] {{ request()->routeIs('about') ? 'text-[#141518] font-extrabold border-b-2 border-[#C5A880] pb-1' : 'text-[#626570]' }}">
                         ABOUT
                     </a>
@@ -72,15 +72,15 @@
                     <a href="{{ route('contact') }}" 
                        class="transition-colors hover:text-[#9E825A] {{ request()->routeIs('contact') ? 'text-[#141518] font-extrabold border-b-2 border-[#C5A880] pb-1' : 'text-[#626570]' }}">
                         CONTACT
-                    </a>
+                    </a> -->
                 </nav>
 
                 <!-- Primary CTA Button: TELL ME ABOUT YOUR PROJECT -->
                 <div class="hidden lg:flex items-center space-x-4">
-                    <a href="{{ route('contact') }}" class="px-5 py-2.5 bg-[#141518] text-white hover:bg-[#C5A880] hover:text-black font-heading font-bold text-xs uppercase tracking-wider rounded-xl transition-all duration-300 shadow-sm flex items-center space-x-2">
+                    <!-- <a href="{{ route('contact') }}" class="px-5 py-2.5 bg-[#141518] text-white hover:bg-[#C5A880] hover:text-black font-heading font-bold text-xs uppercase tracking-wider rounded-xl transition-all duration-300 shadow-sm flex items-center space-x-2">
                         <span>Tell Me About Your Project</span>
                         <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                    </a>
+                    </a> -->
                 </div>
 
                 <!-- Mobile Menu Button (Alpine.js toggle) -->
@@ -95,15 +95,15 @@
                          x-transition
                          class="absolute top-20 left-0 right-0 bg-white border-b border-stone-200 p-6 space-y-4 shadow-xl z-50">
                         <a href="{{ route('home') }}" class="block text-sm font-heading font-bold text-[#141518]">HOME</a>
-                        <a href="{{ route('services.index') }}" class="block text-sm font-heading font-bold text-[#141518]">SERVICES</a>
-                        <a href="{{ route('projects.index') }}" class="block text-sm font-heading font-bold text-[#141518]">PROJECTS</a>
+                        <!-- <a href="{{ route('services.index') }}" class="block text-sm font-heading font-bold text-[#141518]">SERVICES</a> -->
+                        <!-- <a href="{{ route('projects.index') }}" class="block text-sm font-heading font-bold text-[#141518]">PROJECTS</a> -->
                         <a href="{{ route('about') }}" class="block text-sm font-heading font-bold text-[#141518]">ABOUT</a>
-                        <a href="{{ route('contact') }}" class="block text-sm font-heading font-bold text-[#141518]">CONTACT</a>
+                        <!-- <a href="{{ route('contact') }}" class="block text-sm font-heading font-bold text-[#141518]">CONTACT</a> -->
                         
                         <div class="pt-4 border-t border-stone-100">
-                            <a href="{{ route('contact') }}" class="block w-full py-3 bg-[#141518] text-white text-center font-heading font-bold text-xs uppercase tracking-wider rounded-xl">
+                            <!-- <a href="{{ route('contact') }}" class="block w-full py-3 bg-[#141518] text-white text-center font-heading font-bold text-xs uppercase tracking-wider rounded-xl">
                                 Tell Me About Your Project
-                            </a>
+                            </a> -->
                         </div>
                     </div>
                 </div>
