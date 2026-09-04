@@ -24,6 +24,7 @@
 <!-- Filterable Projects Section -->
 <section class="py-16 bg-[#FBF9F5]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="sr-only">Architectural Projects Gallery</h2>
 
         <!-- Category Filter Tabs -->
         <div class="flex flex-wrap items-center gap-3 mb-12 border-b border-stone-200 pb-6">

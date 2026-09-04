@@ -125,6 +125,7 @@
 <!-- ================= 2. THE 3 CORE QUESTIONS (IMMEDIATE CLARITY) ================= -->
 <section class="py-12 sm:py-16 bg-white border-b border-stone-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="sr-only">Studio Overview</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             
             <div class="p-6 rounded-2xl bg-stone-50 border border-stone-200 space-y-2">
@@ -587,31 +588,31 @@
             
             <div class="p-5 sm:p-6 bg-white rounded-2xl border border-stone-200 space-y-3 relative shadow-sm">
                 <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-xs sm:text-sm">01</div>
-                <h4 class="font-heading font-bold text-xs sm:text-sm text-[#141518]">{{ \App\Models\SiteSetting::get('step_1_title', '01 - TELL ME ABOUT YOUR PROJECT') }}</h4>
+                <h3 class="font-heading font-bold text-xs sm:text-sm text-[#141518]">{{ \App\Models\SiteSetting::get('step_1_title', '01 - TELL ME ABOUT YOUR PROJECT') }}</h3>
                 <p class="text-xs text-[#525560] leading-relaxed">{{ \App\Models\SiteSetting::get('step_1_desc', 'Tell me what you need and what you want to achieve.') }}</p>
             </div>
 
             <div class="p-5 sm:p-6 bg-white rounded-2xl border border-stone-200 space-y-3 relative shadow-sm">
                 <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-xs sm:text-sm">02</div>
-                <h4 class="font-heading font-bold text-xs sm:text-sm text-[#141518]">{{ \App\Models\SiteSetting::get('step_2_title', '02 - SEND YOUR INFORMATION') }}</h4>
+                <h3 class="font-heading font-bold text-xs sm:text-sm text-[#141518]">{{ \App\Models\SiteSetting::get('step_2_title', '02 - SEND YOUR INFORMATION') }}</h3>
                 <p class="text-xs text-[#525560] leading-relaxed">{{ \App\Models\SiteSetting::get('step_2_desc', 'Plans, measurements, photographs or sketches.') }}</p>
             </div>
 
             <div class="p-5 sm:p-6 bg-white rounded-2xl border border-stone-200 space-y-3 relative shadow-sm">
                 <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-xs sm:text-sm">03</div>
-                <h4 class="font-heading font-bold text-xs sm:text-sm text-[#141518]">{{ \App\Models\SiteSetting::get('step_3_title', '03 - DESIGN') }}</h4>
+                <h3 class="font-heading font-bold text-xs sm:text-sm text-[#141518]">{{ \App\Models\SiteSetting::get('step_3_title', '03 - DESIGN') }}</h3>
                 <p class="text-xs text-[#525560] leading-relaxed">{{ \App\Models\SiteSetting::get('step_3_desc', 'Your drawings or visualisation are developed around your requirements.') }}</p>
             </div>
 
             <div class="p-5 sm:p-6 bg-white rounded-2xl border border-stone-200 space-y-3 relative shadow-sm">
                 <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-xs sm:text-sm">04</div>
-                <h4 class="font-heading font-bold text-xs sm:text-sm text-[#141518]">{{ \App\Models\SiteSetting::get('step_4_title', '04 - REVIEW') }}</h4>
+                <h3 class="font-heading font-bold text-xs sm:text-sm text-[#141518]">{{ \App\Models\SiteSetting::get('step_4_title', '04 - REVIEW') }}</h3>
                 <p class="text-xs text-[#525560] leading-relaxed">{{ \App\Models\SiteSetting::get('step_4_desc', 'You review the work and provide feedback.') }}</p>
             </div>
 
             <div class="p-5 sm:p-6 bg-white rounded-2xl border border-stone-200 space-y-3 relative shadow-sm sm:col-span-2 lg:col-span-1">
                 <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#141518] text-[#C5A880] flex items-center justify-center font-bold text-xs sm:text-sm">05</div>
-                <h4 class="font-heading font-bold text-xs sm:text-sm text-[#141518]">{{ \App\Models\SiteSetting::get('step_5_title', '05 - FINAL DELIVERY') }}</h4>
+                <h3 class="font-heading font-bold text-xs sm:text-sm text-[#141518]">{{ \App\Models\SiteSetting::get('step_5_title', '05 - FINAL DELIVERY') }}</h3>
                 <p class="text-xs text-[#525560] leading-relaxed">{{ \App\Models\SiteSetting::get('step_5_desc', 'You receive your completed drawings and files.') }}</p>
             </div>
 

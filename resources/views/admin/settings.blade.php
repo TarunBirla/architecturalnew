@@ -50,7 +50,7 @@
                     <!-- Hero Photo 1 -->
                     <div class="p-4 bg-stone-50 rounded-2xl border border-stone-200 space-y-3">
                         <span class="text-xs font-bold text-[#141518]">Hero Photo 1</span>
-                        <img src="{{ $settings['hero_image_1'] ?? 'https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=1600&auto=format&fit=crop' }}" class="w-full h-28 object-cover rounded-xl border border-stone-200">
+                        <img src="{{ $settings['hero_image_1'] ?? 'https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=1600&auto=format&fit=crop' }}" alt="Hero Showcase Image 1" class="w-full h-28 object-cover rounded-xl border border-stone-200">
                         <input type="file" name="hero_image_1_file" accept="image/*" class="text-xs text-[#525560] file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[11px] file:font-bold file:bg-[#141518] file:text-white cursor-pointer">
                         <input type="text" name="hero_image_1" value="{{ $settings['hero_image_1'] ?? '' }}" placeholder="Image URL 1..." class="w-full px-3 py-2 bg-white border border-stone-200 rounded-lg text-[#141518] text-xs font-mono">
                     </div>
@@ -58,7 +58,7 @@
                     <!-- Hero Photo 2 -->
                     <div class="p-4 bg-stone-50 rounded-2xl border border-stone-200 space-y-3">
                         <span class="text-xs font-bold text-[#141518]">Hero Photo 2</span>
-                        <img src="{{ $settings['hero_image_2'] ?? 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop' }}" class="w-full h-28 object-cover rounded-xl border border-stone-200">
+                        <img src="{{ $settings['hero_image_2'] ?? 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop' }}" alt="Hero Showcase Image 2" class="w-full h-28 object-cover rounded-xl border border-stone-200">
                         <input type="file" name="hero_image_2_file" accept="image/*" class="text-xs text-[#525560] file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[11px] file:font-bold file:bg-[#141518] file:text-white cursor-pointer">
                         <input type="text" name="hero_image_2" value="{{ $settings['hero_image_2'] ?? '' }}" placeholder="Image URL 2..." class="w-full px-3 py-2 bg-white border border-stone-200 rounded-lg text-[#141518] text-xs font-mono">
                     </div>
@@ -66,7 +66,7 @@
                     <!-- Hero Photo 3 -->
                     <div class="p-4 bg-stone-50 rounded-2xl border border-stone-200 space-y-3">
                         <span class="text-xs font-bold text-[#141518]">Hero Photo 3</span>
-                        <img src="{{ $settings['hero_image_3'] ?? 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1600&auto=format&fit=crop' }}" class="w-full h-28 object-cover rounded-xl border border-stone-200">
+                        <img src="{{ $settings['hero_image_3'] ?? 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=1600&auto=format&fit=crop' }}" alt="Hero Showcase Image 3" class="w-full h-28 object-cover rounded-xl border border-stone-200">
                         <input type="file" name="hero_image_3_file" accept="image/*" class="text-xs text-[#525560] file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[11px] file:font-bold file:bg-[#141518] file:text-white cursor-pointer">
                         <input type="text" name="hero_image_3" value="{{ $settings['hero_image_3'] ?? '' }}" placeholder="Image URL 3..." class="w-full px-3 py-2 bg-white border border-stone-200 rounded-lg text-[#141518] text-xs font-mono">
                     </div>
@@ -74,7 +74,7 @@
                     <!-- Hero Photo 4 -->
                     <div class="p-4 bg-stone-50 rounded-2xl border border-stone-200 space-y-3">
                         <span class="text-xs font-bold text-[#141518]">Hero Photo 4</span>
-                        <img src="{{ $settings['hero_image_4'] ?? 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600&auto=format&fit=crop' }}" class="w-full h-28 object-cover rounded-xl border border-stone-200">
+                        <img src="{{ $settings['hero_image_4'] ?? 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1600&auto=format&fit=crop' }}" alt="Hero Showcase Image 4" class="w-full h-28 object-cover rounded-xl border border-stone-200">
                         <input type="file" name="hero_image_4_file" accept="image/*" class="text-xs text-[#525560] file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[11px] file:font-bold file:bg-[#141518] file:text-white cursor-pointer">
                         <input type="text" name="hero_image_4" value="{{ $settings['hero_image_4'] ?? '' }}" placeholder="Image URL 4..." class="w-full px-3 py-2 bg-white border border-stone-200 rounded-lg text-[#141518] text-xs font-mono">
                     </div>
@@ -93,7 +93,7 @@
                 <!-- 2D Blueprint Photo -->
                 <div class="p-4 bg-stone-50 rounded-2xl border border-stone-200 space-y-3">
                     <span class="text-xs font-bold text-[#141518]">Technical 2D CAD Blueprint Image</span>
-                    <img src="{{ $settings['from_plan_2d_image'] ?? 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1600&auto=format&fit=crop' }}" class="w-full h-32 object-cover rounded-xl border border-stone-200">
+                    <img src="{{ $settings['from_plan_2d_image'] ?? 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1600&auto=format&fit=crop' }}" alt="2D CAD Blueprint Preview" class="w-full h-32 object-cover rounded-xl border border-stone-200">
                     <input type="file" name="from_plan_2d_image_file" accept="image/*" class="text-xs text-[#525560] file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[11px] file:font-bold file:bg-[#141518] file:text-white cursor-pointer">
                     <input type="text" name="from_plan_2d_image" value="{{ $settings['from_plan_2d_image'] ?? '' }}" placeholder="Image URL..." class="w-full px-3 py-2 bg-white border border-stone-200 rounded-lg text-[#141518] text-xs font-mono">
                 </div>
@@ -101,7 +101,7 @@
                 <!-- 3D Concept Photo -->
                 <div class="p-4 bg-stone-50 rounded-2xl border border-stone-200 space-y-3">
                     <span class="text-xs font-bold text-[#141518]">3D Spatial Concept Image</span>
-                    <img src="{{ $settings['from_plan_3d_image'] ?? 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop' }}" class="w-full h-32 object-cover rounded-xl border border-stone-200">
+                    <img src="{{ $settings['from_plan_3d_image'] ?? 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop' }}" alt="3D Spatial Concept Preview" class="w-full h-32 object-cover rounded-xl border border-stone-200">
                     <input type="file" name="from_plan_3d_image_file" accept="image/*" class="text-xs text-[#525560] file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[11px] file:font-bold file:bg-[#141518] file:text-white cursor-pointer">
                     <input type="text" name="from_plan_3d_image" value="{{ $settings['from_plan_3d_image'] ?? '' }}" placeholder="Image URL..." class="w-full px-3 py-2 bg-white border border-stone-200 rounded-lg text-[#141518] text-xs font-mono">
                 </div>

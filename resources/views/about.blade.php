@@ -49,7 +49,7 @@
 
                 <!-- Software Expertise Stack -->
                 <div class="space-y-3 pt-4 border-t border-stone-200">
-                    <h4 class="text-xs font-heading font-bold uppercase tracking-wider text-[#9E825A]">Tools & Software Expertise</h4>
+                    <h2 class="text-xs font-heading font-bold uppercase tracking-wider text-[#9E825A]">Tools & Software Expertise</h2>
                     <div class="flex flex-wrap gap-2">
                         <span class="px-3.5 py-1.5 bg-white border border-stone-200 rounded-xl text-xs font-mono font-semibold text-[#141518] shadow-sm">AutoCAD 2D</span>
                         <span class="px-3.5 py-1.5 bg-white border border-stone-200 rounded-xl text-xs font-mono font-semibold text-[#141518] shadow-sm">Revit BIM</span>

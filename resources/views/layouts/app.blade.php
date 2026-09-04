@@ -5,6 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Emily Royce | Architectural Design & Visualisation')</title>
 
+    <!-- Essential SEO Meta Tags -->
+    <meta name="description" content="@yield('meta_description', 'Emily Royce offers professional architectural design, precise 2D CAD floor plans, Land Registry lease plans, and photorealistic 3D visualisations.')">
+    <meta name="robots" content="@yield('meta_robots', 'index, follow')">
+    <meta name="keywords" content="Emily Royce, Architecture, Architectural Design, 2D Floor Plans, 3D Visualisation, CAD Drawings, Lease Plans, Land Registry Plans">
+    
+    <!-- Canonical Link -->
+    <link rel="canonical" href="@yield('canonical_url', url()->current())">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="@yield('title', 'Emily Royce | Architectural Design & Visualisation')">
+    <meta property="og:description" content="@yield('meta_description', 'Emily Royce offers professional architectural design, precise 2D CAD floor plans, Land Registry lease plans, and photorealistic 3D visualisations.')">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ \App\Models\SiteSetting::get('about_designer_image', 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop') }}">
+
+    <!-- JSON-LD Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Emily Royce Architectural Design & Visualisation",
+      "url": "{{ url('/') }}",
+      "image": "{{ \App\Models\SiteSetting::get('about_designer_image', 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop') }}",
+      "description": "Creative spatial design, precise 2D floor plans, Land Registry lease plans, and photorealistic 3D visualisations by Emily Royce.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "London & Cambridge",
+        "addressCountry": "UK"
+      },
+      "priceRange": "£85 - £350",
+      "email": "{{ \App\Models\SiteSetting::get('contact_email', 'emily@emilyroyce.com') }}"
+    }
+    </script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

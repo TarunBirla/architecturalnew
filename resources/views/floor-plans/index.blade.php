@@ -75,7 +75,7 @@
             <div class="p-6 bg-white rounded-2xl border border-stone-200 space-y-2">
                 <div class="flex items-center space-x-2 text-[#9E825A]">
                     <i class="fa-solid fa-shield-halved text-base"></i>
-                    <h4 class="font-heading font-bold text-sm text-[#141518]">HM Land Registry Wording</h4>
+                    <h3 class="font-heading font-bold text-sm text-[#141518]">HM Land Registry Wording</h3>
                 </div>
                 <p class="text-xs text-[#525560] leading-relaxed">
                     Prepared in accordance with HM Land Registry requirements.
@@ -85,7 +85,7 @@
             <div class="p-6 bg-white rounded-2xl border border-stone-200 space-y-2">
                 <div class="flex items-center space-x-2 text-[#9E825A]">
                     <i class="fa-solid fa-clock text-base"></i>
-                    <h4 class="font-heading font-bold text-sm text-[#141518]">Turnaround Notice</h4>
+                    <h3 class="font-heading font-bold text-sm text-[#141518]">Turnaround Notice</h3>
                 </div>
                 <p class="text-xs text-[#525560] leading-relaxed">
                     Typical turnaround: 24–48 hours (depending on project scope and availability).

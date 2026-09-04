@@ -72,9 +72,9 @@
             <div class="lg:col-span-7 space-y-8">
                 
                 <div class="bg-white p-8 rounded-3xl border border-stone-200 shadow-sm space-y-4">
-                    <h3 class="text-2xl font-heading font-bold text-[#141518] border-b border-stone-200 pb-3">
+                    <h2 class="text-2xl font-heading font-bold text-[#141518] border-b border-stone-200 pb-3">
                         Design Concept & Scope
-                    </h3>
+                    </h2>
                     <p class="text-[#3A3C44] text-sm sm:text-base leading-relaxed">
                         {{ $project->overview }}
                     </p>
@@ -90,7 +90,7 @@
                     <div class="bg-white p-6 rounded-3xl space-y-3 border border-stone-200 shadow-sm">
                         <div class="flex items-center space-x-3 text-[#9E825A]">
                             <i class="fa-solid fa-layer-group text-lg"></i>
-                            <h4 class="font-heading font-bold text-[#141518] text-sm">Scope of Work Delivered</h4>
+                            <h3 class="font-heading font-bold text-[#141518] text-sm">Scope of Work Delivered</h3>
                         </div>
                         <p class="text-xs text-[#3A3C44] leading-relaxed font-semibold">
                             {{ $project->sustainability_specs }}
@@ -101,10 +101,10 @@
                 <!-- Blueprint / CAD Plan View -->
                 @if($project->blueprint_image)
                     <div class="space-y-4 pt-2">
-                        <h4 class="text-xl font-heading font-bold text-[#141518] flex items-center space-x-2">
+                        <h3 class="text-xl font-heading font-bold text-[#141518] flex items-center space-x-2">
                             <i class="fa-solid fa-ruler-combined text-[#9E825A]"></i>
                             <span>Technical 2D CAD Plan & Drawing Specs</span>
-                        </h4>
+                        </h3>
                         <div class="bg-white rounded-3xl overflow-hidden border border-stone-200 p-4 shadow-sm">
                             <img src="{{ $project->blueprint_image }}" alt="Blueprint CAD Drawing" class="w-full h-80 object-cover rounded-2xl border border-stone-200 bg-stone-50">
                             <div class="p-3 text-xs text-[#525560] font-mono flex justify-between items-center">
@@ -119,10 +119,10 @@
             <!-- Right: Specifications Sheet Sidebar -->
             <div class="lg:col-span-5 space-y-6">
                 <div class="bg-white p-8 rounded-3xl border border-stone-200 shadow-sm space-y-6">
-                    <h3 class="text-lg font-heading font-bold text-[#141518] border-b border-stone-200 pb-3 flex items-center justify-between">
+                    <h2 class="text-lg font-heading font-bold text-[#141518] border-b border-stone-200 pb-3 flex items-center justify-between">
                         <span>Project Details</span>
                         <i class="fa-solid fa-sliders text-[#9E825A]"></i>
-                    </h3>
+                    </h2>
 
                     @if($project->specifications)
                         <div class="space-y-4">

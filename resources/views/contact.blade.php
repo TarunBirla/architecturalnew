@@ -139,9 +139,9 @@
             <!-- Right: Direct Contact Info -->
             <div class="lg:col-span-5 space-y-8">
                 <div class="bg-white p-8 rounded-3xl border border-stone-200 shadow-sm space-y-6">
-                    <h3 class="text-xl font-heading font-bold text-[#141518] border-b border-stone-200 pb-4">
+                    <h2 class="text-xl font-heading font-bold text-[#141518] border-b border-stone-200 pb-4">
                         Direct Contact
-                    </h3>
+                    </h2>
 
                     <div class="space-y-4 text-sm text-[#3A3C44]">
                         <div class="flex items-start space-x-4">
@@ -180,7 +180,7 @@
                 <div class="bg-stone-100 p-6 rounded-2xl border border-stone-200 space-y-2">
                     <div class="flex items-center space-x-2 text-[#9E825A]">
                         <i class="fa-solid fa-shield-halved text-xs"></i>
-                        <h4 class="font-heading font-bold text-xs uppercase tracking-wider">HM Land Registry Wording</h4>
+                        <h3 class="font-heading font-bold text-xs uppercase tracking-wider">HM Land Registry Wording</h3>
                     </div>
                     <p class="text-[11px] text-[#525560] leading-relaxed">
                         Lease plans are prepared in accordance with HM Land Registry requirements.
